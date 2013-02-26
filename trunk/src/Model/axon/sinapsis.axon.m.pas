@@ -3,7 +3,8 @@ unit sinapsis.axon.m;
 interface
 
 uses
-  dorm.Mappings;
+  dorm.Mappings,
+  dorm.ObjectStatus;
 
 type
   [Entity('AXONDATA')]
@@ -14,6 +15,8 @@ type
 	  FCreatedAt : TDateTime;
 	  FModifiedBy : Integer;
 	  FModifiedAt : TDateTime;
+    FObjStatus: TdormObjectStatus;
+    procedure SetObjStatus(const Value : TdormObjectStatus);
   published
    [Id]
    [Column('ID')]
@@ -26,6 +29,8 @@ type
    property ModifiedBy:Integer read FModifiedBy write FModifiedBy;
    [Column('ModifiedAt')]
    property ModifiedAt:TDateTime read FModifiedAt write FModifiedAt;
+   [Transient]
+   property ObjStatus: TdormObjectStatus read FObjStatus write SetObjStatus;
   end;
 
   [Entity('AXONCATALOGO')]
@@ -74,5 +79,15 @@ implementation
 
 { TAxonData }
 
+
+{ TAxonModel }
+
+
+{ TAxonModel }
+
+procedure TAxonModel.SetObjStatus(const Value: TdormObjectStatus);
+begin
+  FObjStatus := Value;
+end;
 
 end.
