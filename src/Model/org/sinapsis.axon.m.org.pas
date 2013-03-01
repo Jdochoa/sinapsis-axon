@@ -8,9 +8,10 @@ uses
   ;
 
 type
-  TAxonPais  = class;
+  TPais  = class;
+  TEmpresa = class;
 
-  TAxonDepartamento = class(TAxonCatalogo)
+  TDepartamento = class(TAxonCatalogo)
   private
     { private declarations }
   protected
@@ -22,7 +23,7 @@ type
     { published declarations }
   end;
 
-  TAxonPais = class(TAxonCatalogo)
+  TPais = class(TAxonCatalogo)
   private
     { private declarations }
   protected
@@ -35,8 +36,8 @@ type
   end;
 
 
-  TAxonEmpresa = class;
-  TAxonSucursal = class(TAxonCatalogo)
+  
+  TSucursal = class(TAxonCatalogo)
   private
     { private declarations }
   protected
@@ -48,7 +49,7 @@ type
     { published declarations }
   end;
 
-  TAxonEmpresa = class(TAxonCatalogo)
+  TEmpresa = class(TAxonCatalogo)
   private
     { private declarations }
   protected
@@ -60,6 +61,17 @@ type
     { published declarations }
   end;
 
+  TGrupoEmpresa = class(TAxonCatalogo)
+  private
+    { private declarations }
+  protected
+    { protected declarations }
+  public
+    { public declarations }
+
+  published
+    { published declarations }
+  end;
 
 implementation
 
