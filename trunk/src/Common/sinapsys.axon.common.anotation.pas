@@ -5,7 +5,9 @@ interface
 uses
 	Classes,
   System.Rtti,
-  System.SysUtils;
+  System.SysUtils,
+  DSharp.Core.Reflection
+  ;
 
 Type
 	CustomValidate = class(TCustomAttribute)
@@ -39,6 +41,7 @@ Type
 
 
   function Validate(Target : TObject) : boolean;
+  function Validate2(Target : TObject; Method: TRttiMethod) : boolean;
 
 var
   AxonFormatSetting : TFormatSettings;
@@ -46,7 +49,57 @@ var
 
 implementation
 
-  
+uses
+  System.TypInfo;
+
+function Validate2(Target:TObject; Method: TRttiMethod): boolean;
+var
+  p : TRttiProperty;
+  PropInfo: PPropInfo;
+  PM: Longint;
+  m : TMethod;
+  a : TCustomAttribute;
+  rm : TRttiMethod;
+
+begin
+  if not Assigned(Target) then
+    raise Exception.Create('Can''t validate nil object');
+  for p in Target.GetProperties do
+    if p is TRttiInstanceProperty then
+    begin
+      PropInfo := TRttiInstanceProperty(p).PropInfo;
+      if PropInfo^.SetProc <> nil then
+            PM := Longint(PropInfo^.SetProc);
+      if (PM and $FF000000) = $FE000000 then
+        M.Code := Pointer(PInteger(PInteger(Target)^ + SmallInt(PM))^)
+      else
+        M.Code := Pointer(PM);
+      M.Data := Target;
+      p.TryGetMethod()
+      TRttiInstanceProperty(p).GetCustomAttribute
+      Writeln('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
+      Writeln(p.ToString+
+                Format('Set: %p',   [TRttiInstanceProperty(p).PropInfo^.SetProc])+
+                Format('  Get: %p', [TRttiInstanceProperty(p).PropInfo^.GetProc])+
+                Format('  Get: %p', [M.Code])
+
+                );
+
+    for rm in Target.GetMethods do
+    begin
+      if not (rm.IsConstructor or rm.IsDestructor or rm.IsClassMethod)  then
+          Writeln(rm.ToString+Format(': %p', [rm.CodeAddress])+'  ');
+    end;
+    readln;
+
+{      if Method.CodeAddress = m.Code then
+        for a in p.GetAttributes do
+            if a is CustomValidate then
+              Result:= CustomValidate(a).IsValid(P.GetValue(Target));}
+    end;
+
+end;
+
 function Validate(Target : TObject) : boolean;
 var
   ctx : TRttiContext;
