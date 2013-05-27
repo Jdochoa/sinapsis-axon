@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/01/28 17:47:18.000.448,=C:\Users\jochoa\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/02/21 10:18:46.000.433,E:\Sinapsis\scr\Ejemplos\Common\Validaciones.dproj=C:\Users\jochoa\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2013/02/21 10:19:05.000.953,=E:\Sinapsis\scr\Common\sinapsys.axon.common.anotation.pas</Transaction>
+    <Transaction>2013/02/25 17:13:27.414,=E:\sinapsis.axon\trunk\src\Common\sinapsys.axon.common.anotation.pas</Transaction>
+  </Transactions>
+</BorlandProject>

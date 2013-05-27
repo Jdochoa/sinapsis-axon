@@ -35,7 +35,11 @@ CREATE DOMAIN AXN_FECHA
 
 
 	
+CREATE DOMAIN AXN_LOGICO
+	AS Char(1) DEFAULT 'U' NOT NULL CHECK (value = 'T' or value = 'F', or value = 'U') COLLATE ISO8859_1;
 	
+
+
 	
 /*--------------------------------------------*/	
 CREATE DOMAIN AXN_FORMAAFECTA

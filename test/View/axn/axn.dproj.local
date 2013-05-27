@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/01/28 17:47:18.000.448,=C:\Users\jochoa\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/04/12 17:02:19.000.311,=C:\Users\jochoa\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/05/17 11:43:55.000.971,=C:\Users\jochoa\Documents\RAD Studio\Projects\GroupedItems1.pas</Transaction>
+    <Transaction>2013/05/17 11:43:58.000.126,=C:\Users\jochoa\Documents\RAD Studio\Projects\ItemDetail1.pas</Transaction>
+    <Transaction>2013/05/17 11:45:53.000.505,=C:\Users\jochoa\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/05/17 11:46:59.000.004,C:\Users\jochoa\Documents\RAD Studio\Projects\Unit1.dfm=E:\Sinapsis\sinapsis.axon\trunk\test\View\axn\axon.dfm</Transaction>
+    <Transaction>2013/05/17 11:46:59.000.004,C:\Users\jochoa\Documents\RAD Studio\Projects\Unit1.pas=E:\Sinapsis\sinapsis.axon\trunk\test\View\axn\axon.pas</Transaction>
+    <Transaction>2013/05/17 11:47:09.000.477,C:\Users\jochoa\Documents\RAD Studio\Projects\Project1.dproj=E:\Sinapsis\sinapsis.axon\trunk\test\View\axn\axn.dproj</Transaction>
+    <Transaction>2013/05/17 11:47:21.000.268,=E:\Sinapsis\sinapsis.axon\trunk\test\View\axn\Unit1.pas</Transaction>
+    <Transaction>2013/05/17 11:48:35.000.232,E:\Sinapsis\sinapsis.axon\trunk\test\View\axn\Unit1.pas=E:\Sinapsis\sinapsis.axon\trunk\src\View\axn\sinapsis.axon.view.pas</Transaction>
+    <Transaction>2013/05/17 12:41:24.000.717,=E:\Sinapsis\sinapsis.axon\trunk\src\Model\axn\sinapsis.axon.m.pas</Transaction>
+    <Transaction>2013/05/17 12:42:27.000.243,=E:\Sinapsis\sinapsis.axon\trunk\test\View\axn\ModelSupport_axn\default.txaPackage</Transaction>
+    <Transaction>2013/05/20 17:17:35.000.543,=E:\Sinapsis\sinapsis.axon\trunk\test\View\axn\Unit1.pas</Transaction>
+    <Transaction>2013/05/20 17:18:55.000.192,E:\Sinapsis\sinapsis.axon\trunk\test\View\axn\Unit1.pas=E:\Sinapsis\sinapsis.axon\trunk\src\View\common\sinapsis.axn.v.livebinding.pas</Transaction>
+  </Transactions>
+</BorlandProject>

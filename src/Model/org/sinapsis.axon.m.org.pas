@@ -3,74 +3,30 @@ unit sinapsis.axon.m.org;
 interface
 
 uses
-  sinapsis.axon.m
-  ,dorm.Mappings
+  dorm.Mappings,
+  sinapsis.axon.m,
+  sinapsis.axon.m.int
+
   ;
 
 type
-  TPais  = class;
-  TEmpresa = class;
-
-  TDepartamento = class(TAxonCatalogo)
-  private
-    { private declarations }
-  protected
-    { protected declarations }
-  public
-    { public declarations }
-
-  published
-    { published declarations }
-  end;
-
-  TPais = class(TAxonCatalogo)
-  private
-    { private declarations }
-  protected
-    { protected declarations }
-  public
-    { public declarations }
-
-  published
-    { published declarations }
-  end;
-
-
-  
-  TSucursal = class(TAxonCatalogo)
-  private
-    { private declarations }
-  protected
-    { protected declarations }
-  public
-    { public declarations }
-
-  published
-    { published declarations }
-  end;
-
+  [Entity('ORG_EMP0_EMPRESA')]
   TEmpresa = class(TAxonCatalogo)
   private
-    { private declarations }
+	  FPis0_ID : Integer;
+	  FMnd0_ID : Integer;
+    FPais: TPais;
+    FMoneda: TMoneda;
   protected
-    { protected declarations }
+    [Column('PIS0_ID')]
+    property PIS0_ID: Integer read FPis0_ID write FPis0_ID;
+    [Column('MND0_ID')]
+    property MND0_ID: Integer read FMnd0_ID write FMnd0_ID;
   public
-    { public declarations }
-
-  published
-    { published declarations }
-  end;
-
-  TGrupoEmpresa = class(TAxonCatalogo)
-  private
-    { private declarations }
-  protected
-    { protected declarations }
-  public
-    { public declarations }
-
-  published
-    { published declarations }
+    [BelongsTo('PIS0_ID', True)]
+    property Pais: TPais read FPais write FPais;
+    [BelongsTo('MND0_ID', True)]
+    property Moneda: TMoneda read FMoneda write FMoneda;
   end;
 
 implementation

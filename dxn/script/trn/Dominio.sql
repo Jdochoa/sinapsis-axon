@@ -1,0 +1,6 @@
+CREATE DOMAIN TRN_FORMAAFECTA
+	AS Char(1) DEFAULT '' NOT NULL CHECK('+','-','');
+
+
+
+
