@@ -1,4 +1,4 @@
-unit sinapsys.axon.common.generator;
+unit sinapsis.axn.dorm.generator;
 
 interface
 uses

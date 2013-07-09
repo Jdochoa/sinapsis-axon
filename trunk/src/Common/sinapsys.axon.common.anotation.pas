@@ -75,8 +75,8 @@ begin
       else
         M.Code := Pointer(PM);
       M.Data := Target;
-      p.TryGetMethod()
-      TRttiInstanceProperty(p).GetCustomAttribute
+      //p.TryGetMethod();
+      //TRttiInstanceProperty(p).GetCustomAttribute
       Writeln('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
       Writeln(p.ToString+
                 Format('Set: %p',   [TRttiInstanceProperty(p).PropInfo^.SetProc])+
