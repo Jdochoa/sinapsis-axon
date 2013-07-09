@@ -1,4 +1,4 @@
-unit dorm.adapter.UIB.BaseAdapterHelper;
+unit sinapsis.axn.dorm.adapter.UIB.BaseAdapterHelper;
 
 interface
 
