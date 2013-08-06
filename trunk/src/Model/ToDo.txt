@@ -15,3 +15,5 @@ org	-	Sucursales.
 	-	Bodegas.
 prv	-	Programar.
 trn	-	Terminar de definir el mecanismo para el manejo de correlativos.
+mdl -	Programar.
+seg -	Programar.
