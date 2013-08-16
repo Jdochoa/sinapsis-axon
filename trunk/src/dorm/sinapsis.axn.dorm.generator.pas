@@ -26,7 +26,7 @@ implementation
 
 function TAxonKeyGenerator.GetSequenceFormatTemplate: String;
 begin
-  Result := 'GEN_%s_ID';
+  Result := 'GEN_%s';
 end;
 
 function TAxonKeyGenerator.NewIntegerKey(const Entity: string): UInt64;

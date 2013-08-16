@@ -1,11 +1,11 @@
-unit sinapsis.axn.dormhelper;
+unit sinapsis.axn.dorm.helper;
 
 interface
 uses
   dorm;
 type
   TAxnSesion = class helper for TSession
-    procedure Persist(x:IInterface);
+    procedure PersistIntf(x:IInterface);
   end;
 
 implementation
@@ -15,9 +15,9 @@ implementation
 
 { TAxnSesion }
 
-procedure TAxnSesion.Persist(x: IInterface);
+procedure TAxnSesion.PersistIntf(x: IInterface);
 begin
-
+  Persist(TObject(x));
 end;
 
 { TAxnSesion }
