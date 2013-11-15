@@ -5,7 +5,7 @@ uses
   sinapsis.axn.m.interfaz;
 
 type
-  IAxnMCLT = interface(IAxnMCtl)
+  IAxnMCli0 = interface(IAxnMCtl)
     ['{00E292A3-473F-4CE1-A88F-4D6232638CD1}']
     procedure SetNIT(Value:String);
     procedure SetDireccion(Value:String);
@@ -28,6 +28,7 @@ type
     property Sexo:String read GetSexo write SetSexo;
     property Identificacion: string read GetIdentificacion write SetIdentificacion;
   end;
+
 
 implementation
 

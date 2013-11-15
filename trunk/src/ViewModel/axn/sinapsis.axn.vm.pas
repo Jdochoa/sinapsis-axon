@@ -1,4 +1,4 @@
-unit sinapsis.vm.axon.axon;
+unit sinapsis.axn.vm;
 
 
 interface
@@ -6,9 +6,29 @@ interface
 uses
   dorm,
 	Spring.Collections,
-	sinapsis.vm.axon.interfaz;
+  sinapsis.axn.common.clases,
+
+  sinapsis.axn.m,
+
+	sinapsis.axn.vm.interfaz;
+
 
 type
+
+  TAxnVM = class abstract (TInterfacedObjectAxn,IVMAxn)
+  private
+    FAxnM : TAxnM;
+    procedure SetId(const Value : Integer);
+    function GetId:Integer;
+  protected
+    property AxnM : TAxnM read FAxnM write FAxnM;
+  public
+    property ID: Integer read GetID write SetID;
+  end;
+
+
+
+
   TAxonData = class;
 
   IData = Interface
@@ -19,8 +39,8 @@ type
 
   end;
 
-
-	TVMAxon = class(TInterfacedObject, IVMAxon)
+{
+	TVMAxon = class(TInterfacedObject, IVMAxn)
 	private
     FData : TAxonData;
     FOldData: TAxonData;
@@ -50,8 +70,8 @@ type
 		constructor Create(); overload;
 		constructor Create(Id:Integer); overload;
 	end;
-
- 	TVMAxonList<T: IVMAxon> = class(TInterfacedObject, IVMAxonList<T>)
+ }
+{ 	TVMAxonList<T: IVMAxon> = class(TInterfacedObject, IVMAxonList<T>)
 	private
 		FList : IList<T>;
 	protected
@@ -86,16 +106,16 @@ type
 
 	  constructor Create(Codigo:string); overload;
    end;
-
+}
 implementation
 uses
-  sinapsis.vm.servicios,
-  dorm.Filters,
-  DSharp.Core.Reflection
-  ;
+//  sinapsis.vm.servicios,
+  dorm.Filters;
+//  DSharp.Core.Reflection
+//  ;
 
 { TVMAxon }
-
+{
 function TVMAxon.Cancelar: Boolean;
 begin
   FisEdited := False;
@@ -211,9 +231,9 @@ begin
   else
 //    Result := InternalSave;
 end;
-
+}
 { TVMAxonList<T> }
-
+{
 function TVMAxonList<T>.Cancelar: Boolean;
 begin
 
@@ -253,9 +273,9 @@ begin
   else
 //    Result := InternalUpdate;
 end;
-
+}
 { TVMAxonCatalogo }
-
+{
 constructor TVMAxonCatalogo.Create(Codigo: string);
 begin
   Create();
@@ -285,6 +305,19 @@ procedure TVMAxonCatalogo.setDescripcion(const Value: String);
 begin
   FData.GetProperty('Descripcion').SetValue(FData,Value);
 end;
+}
+{ TAxnVM }
+
+function TAxnVM.GetId: Integer;
+begin
+  Result := FAxnM.Id;
+end;
+
+procedure TAxnVM.SetId(const Value: Integer);
+begin
+  FAxnM.Id := Value;
+end;
+
 
 end.
 

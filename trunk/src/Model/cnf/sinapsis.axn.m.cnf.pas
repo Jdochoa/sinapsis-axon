@@ -1,4 +1,4 @@
-unit sinapsis.axon.m.cnf;
+unit sinapsis.axn.m.cnf;
 
 
 interface

@@ -9,7 +9,7 @@ uses
 type
   [Entity('AXN_CATALOGO')]
   [NoAutomapping]
-  TAxnCtl = class {$ifndef Debug}abstract {$endif} (TAxnM, IAxnMCtl)
+  TAxnMCTL = class {$ifndef Debug}abstract {$endif} (TAxnM, IAxnMCtl)
   private
     FCodigo: String;
     FDescripcion: String;
@@ -17,7 +17,7 @@ type
     procedure setCodigo(const Value : string);
     procedure setDescripcion (const Value : string); virtual;
     function  getCodigo : String;
-    function  getDescripcion : String;
+    function  getDescripcion : String; virtual;
   public
     [Column('CODIGO')]
     property Codigo: String read getCodigo write setCodigo;
@@ -26,26 +26,29 @@ type
     property Descripcion: String read getDescripcion write setDescripcion;
   end;
 
+//  TAxnMListCtl = Class(TAxnMList, IAxnMListCtl)
+//  End;
+
 implementation
 
 { TAxonCatalogo }
 
-function TAxnCtl.getCodigo: String;
+function TAxnMCTL.getCodigo: String;
 begin
   Result := FCodigo;
 end;
 
-function TAxnCtl.getDescripcion: String;
+function TAxnMCTL.getDescripcion: String;
 begin
   Result := FDescripcion;
 end;
 
-procedure TAxnCtl.setCodigo(const Value: string);
+procedure TAxnMCTL.setCodigo(const Value: string);
 begin
   FCodigo := Value;
 end;
 
-procedure TAxnCtl.setDescripcion(const Value: string);
+procedure TAxnMCTL.setDescripcion(const Value: string);
 begin
   FDescripcion := Value;
 end;

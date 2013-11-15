@@ -1,10 +1,10 @@
-unit sinapsis.axon.m.est;
+unit sinapsis.axn.m.est;
 
 interface
 
 uses
   dorm.Mappings,
-  sinapsis.axon.m
+  sinapsis.axn.m
   ;
 
 type

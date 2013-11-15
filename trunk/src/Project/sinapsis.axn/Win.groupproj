@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{0082F122-DF2A-4F5E-87B0-B9B36934EC4C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="sinapsis.axon.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="sinapsis_axon">
+        <MSBuild Projects="sinapsis.axon.dproj"/>
+    </Target>
+    <Target Name="sinapsis_axon:Clean">
+        <MSBuild Projects="sinapsis.axon.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sinapsis_axon:Make">
+        <MSBuild Projects="sinapsis.axon.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="sinapsis_axon"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="sinapsis_axon:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="sinapsis_axon:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

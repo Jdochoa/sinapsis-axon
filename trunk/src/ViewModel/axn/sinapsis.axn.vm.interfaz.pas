@@ -1,4 +1,4 @@
-unit sinapsis.vm.axn.interfaz;
+unit sinapsis.axn.vm.interfaz;
 
 interface
 

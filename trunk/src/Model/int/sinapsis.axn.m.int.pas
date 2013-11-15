@@ -1,4 +1,4 @@
-unit sinapsis.axon.m.int;
+unit sinapsis.axn.m.int;
 
 interface
 
@@ -6,7 +6,7 @@ uses
   dorm.Mappings,
   Spring.Collections.Lists,
 
-  sinapsis.axon.m
+  sinapsis.axn.m
 
   ;
 

@@ -2,7 +2,13 @@ unit sinapsis.axn.m;
 
 interface
 uses
+//  System.Generics.Collections,
+
   dorm.Mappings,
+  spring,
+  spring.Collections,
+  spring.Collections.Lists,
+
   sinapsis.axn.common.clases,
   sinapsis.axn.m.interfaz;
 
@@ -10,7 +16,7 @@ type
 
   [Entity('AXN_DATA')]
   [NoAutomapping]
-  TAxnM = class {$ifndef Debug}abstract {$endif}(TInterfacedObject,IAxnM)
+  TAxnM = class {$ifndef Debug}abstract {$endif}(TInterfacedObjectAxn,IAxnM)
   private
     FId: Integer;
 	  FCreatedBy : Integer;
@@ -23,23 +29,34 @@ type
     function getCreatedAt():TDateTime;
     function getModifiedBy():Integer;
     function getModifiedAt():TDateTime;
+    procedure setId(Value:Integer);
   public
    [Id]
    [Column('ID')]
-   property Id:Integer read getId;
+   property Id:Integer read getId write setId;
+   [Transient]
    [Column('CREATEDBY')]
-   [Transient]
    property CreatedBy:Integer read getCreatedBy;
+   [Transient]
    [Column('CREATEDAT')]
-   [Transient]
    property CreatedAt:TDateTime read getCreatedAt;
+   [Transient]
    [Column('MODIFIEDBY')]
-   [Transient]
    property ModifiedBy:Integer read getModifiedBy;
-   [Column('MODIFIEDAT')]
    [Transient]
+   [Column('MODIFIEDAT')]
    property ModifiedAt:TDateTime read getModifiedAt;
   end;
+
+  {TAxnMList<T:TAxnM> = class(TObjectList<T>, IAxnMList<T>)
+  private
+  protected
+    procedure setLista(const Value :TObjectList<T>);
+    function getLista:TObjectList<T>;
+  public
+    property Lista:TObjectList<T> read getLista write setLista;
+  end;}
+
 
 implementation
 
@@ -70,5 +87,11 @@ begin
   Result := FModifiedBy;
 end;
 
+
+
+procedure TAxnM.setId(Value: Integer);
+begin
+  FId := Value;
+end;
 
 end.

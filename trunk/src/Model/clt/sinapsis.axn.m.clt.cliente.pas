@@ -9,7 +9,7 @@ uses
 type
   [Entity('CLT_CLI0_CLIENTE')]
   [NoAutomapping]
-  TAxnMClt = class(TAxnCtl,IAxnMClt)
+  TAxnMCli0 = class(TAxnMCtl,IAxnMCli0)
   private
     FNIT :string;
     FDireccion :string;
@@ -17,7 +17,6 @@ type
     FApellido :string;
     FSexo :string;
     FIdentificacion :string;
-
   protected
     procedure SetNIT(Value:String);
     procedure SetDireccion(Value:String);
@@ -32,7 +31,8 @@ type
     function GetApellido :string;
     function GetSexo :string;
     function GetIdentificacion :string;
-    function GetDescripcion: String;
+    function getDescripcion: string; override;
+
 
   public
     [Column('NIT')]
@@ -47,9 +47,14 @@ type
     property Sexo:String read GetSexo write SetSexo;
     [Column('IDENTIFICACION')]
     property Identificacion: string read GetIdentificacion write SetIdentificacion;
-    [Transient]
+//    [Transient]
+//    [Column('DESCRIPCION')]
     property Descripcion: String read GetDescripcion;
   end;
+
+//  TAxnMListCli0 = class (TAxnMListCTL, IAxnMListCli0)
+//  end;
+
 
 implementation
 
@@ -59,67 +64,67 @@ uses
   dorm.Utils
   ;
 
-function TAxnMClt.GetApellido: string;
+function TAxnMCli0.GetApellido: string;
 begin
   Result := FApellido;
 end;
 
-function TAxnMClt.GetDescripcion: String;
+function TAxnMCli0.GetDescripcion: String;
 begin
-
+  Result := Nombre+', '+ Apellido;
 end;
 
-function TAxnMClt.GetDireccion: string;
+function TAxnMCli0.GetDireccion: string;
 begin
   Result := FDireccion;
 end;
 
-function TAxnMClt.GetIdentificacion: string;
+function TAxnMCli0.GetIdentificacion: string;
 begin
   Result := FIdentificacion;
 end;
 
-function TAxnMClt.GetNIT: string;
+function TAxnMCli0.GetNIT: string;
 begin
   Result := FNIT;
 end;
 
-function TAxnMClt.GetNombre: string;
+function TAxnMCli0.GetNombre: string;
 begin
   Result := FNombre;
 end;
 
-function TAxnMClt.GetSexo: string;
+function TAxnMCli0.GetSexo: string;
 begin
   Result := FSexo;
 end;
 
-procedure TAxnMClt.SetApellido(Value: String);
+procedure TAxnMCli0.SetApellido(Value: String);
 begin
   FApellido := Value;
 end;
 
-procedure TAxnMClt.SetDireccion(Value: String);
+procedure TAxnMCli0.SetDireccion(Value: String);
 begin
   FDireccion := Value;
 end;
 
-procedure TAxnMClt.SetIdentificacion(Value: String);
+procedure TAxnMCli0.SetIdentificacion(Value: String);
 begin
   FIdentificacion := Value;
 end;
 
-procedure TAxnMClt.SetNIT(Value: String);
+procedure TAxnMCli0.SetNIT(Value: String);
 begin
   FNIT := Value;
 end;
 
-procedure TAxnMClt.SetNombre(Value: String);
+procedure TAxnMCli0.SetNombre(Value: String);
 begin
   FNombre := Value;
 end;
 
-procedure TAxnMClt.SetSexo(Value: String);
+procedure TAxnMCli0.SetSexo(Value: String);
 begin
   FSexo := Value;
 end;

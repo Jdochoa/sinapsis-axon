@@ -1,4 +1,4 @@
-unit sinapsis.axon.m.trn;
+unit sinapsis.axn.m.trn;
 
 
 interface
@@ -6,10 +6,10 @@ interface
 uses
   dorm.Mappings,
   Spring.Collections.Lists,
-  sinapsis.axon.m,
-  sinapsis.axon.m.cnf,
-  sinapsis.axon.m.org,
-  sinapsis.axon.m.est
+  sinapsis.axn.m,
+  sinapsis.axn.m.cnf,
+  sinapsis.axn.m.org,
+  sinapsis.axn.m.est
   ;
 
 type
