@@ -39,14 +39,14 @@ begin
 
   Position := poOwnerFormCenter;
 
-  Timer.Enabled := False;
+  Timer.Enabled := True;
   Timer.Interval := 750;
 end;
 
 procedure TFormSplash.TimerTimer(Sender: TObject);
 begin
   Close;
-  Release;
+//  Release;
 end;
 
 end.

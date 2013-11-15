@@ -1,11 +1,11 @@
-unit sinapsis.axon.m.org;
+unit sinapsis.axn.m.org;
 
 interface
 
 uses
   dorm.Mappings,
-  sinapsis.axon.m,
-  sinapsis.axon.m.int
+  sinapsis.axn.m,
+  sinapsis.axn.m.int
 
   ;
 

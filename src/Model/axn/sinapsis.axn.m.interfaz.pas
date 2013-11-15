@@ -1,11 +1,17 @@
 unit sinapsis.axn.m.interfaz;
 
 interface
+uses
+//  System.Generics.Collections,
+  Spring.Collections,
+  Spring.Collections.Lists,
+  sinapsis.axn.common.clases
+  ;
+
 type
 
   IAxnM = Interface
     ['{8F8D6CA2-E11F-4DB1-9AF4-31C21E17519F}']
-
     function getId():Integer;
     function getCreatedBy():Integer;
     function getCreatedAt():TDateTime;
@@ -19,6 +25,14 @@ type
     property ModifiedAt:TDateTime read getModifiedAt;
   end;
 
+  IAxnMList<I : IAxnM> = interface
+    ['{EB39FDB4-675C-45DA-83FE-D9CB63E935F0}']
+    procedure SetLista(Value : IList<I>);
+    function GetLista : IList<I>;
+    property Lista: IList<I> read GetLista write SetLista;
+  end;
+
+
   IAxnMCtl = interface(IAxnM)
     ['{E2A4A226-AAB9-44D1-8F09-0D53F6D887D4}']
     procedure setCodigo(const Value : string);
@@ -30,6 +44,8 @@ type
     property Codigo: String read getCodigo write setCodigo;
     property Descripcion: String read getDescripcion write setDescripcion;
   end;
+
+
 
   IAxnMDct = interface(IAxnM)
     ['{C820A84D-3590-4914-8C27-1FC79C4F9A46}']

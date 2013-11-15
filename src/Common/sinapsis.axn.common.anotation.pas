@@ -1,4 +1,4 @@
-unit sinapsys.axon.common.anotation;
+unit sinapsis.axn.common.anotation;
 
 interface
 
