@@ -1,4 +1,4 @@
-unit sinapsis.axn.m.int;
+unit sinapsis.axon.m.int;
 
 interface
 
