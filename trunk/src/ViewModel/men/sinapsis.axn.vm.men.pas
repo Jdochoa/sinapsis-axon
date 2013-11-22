@@ -3,31 +3,57 @@ unit sinapsis.axn.vm.men;
 interface
 
 uses
+  System.Generics.Collections,
+
+	Spring.Collections,
+  Spring.Collections.Lists,
+
+  sinapsis.axn.m,
+  sinapsis.axn.m.men,
+
+  sinapsis.axn.vm,
   sinapsis.axn.vm.Catalogo,
-  sinapsis.axn.m.men;
+  sinapsis.axn.vm.ViewModel,
+
+  sinapsis.axn.m.mdl,
+  sinapsis.axn.vm.mdl,
+
+  dorm.Filters
+
+  ;
 
 type
-  TVMMenu = class(TAxnCTLVM)
+  TAxnVMMenus = class;
+
+  TAxnVMMenuItem = class(TAxnVMCtl)
   private
     FHModule : HMODULE;
   protected
-    function GetMenu: TMenu;
-    procedure SetMenu(const Value : TMenu);
+    function GetMenuItem: TAxnMMenuItem;
+    procedure SetMenuItem(const Value : TAxnMMenuItem);
   public
-    constructor Create ( const Value : TMenu);
+    constructor Create(Value : TAxnM); override;
     destructor Destroy; override;
 
-    property Menu: TMenu read GetMenu write SetMenu;
+    property MenuItem: TAxnMMenuItem read GetMenuItem write SetMenuItem;
     procedure Ejecutar();
+    function SubMenu:TAxnVMMenus;
   end;
 
-  TVMMen = class
+  TAxnVMMenus = class(TAxnMVLista<TAxnVMMenuItem,TAxnMMenuItem>)
   private
   protected
+    function NewItem(const Value: TAxnMMenuItem):TAxnVMMenuItem;override ;
   public
   end;
 
-
+  TViewModelMenu = class (TViewModel)
+  private
+    function GetMenu(Index: String ): TAxnVMMenus;
+  protected
+  public
+    property Menu[Index:String]: TAxnVMMenus read GetMenu;
+  end;
 
 
 implementation
@@ -38,28 +64,31 @@ uses
     ;
 
 
-{ TVMMenu }
+{ TAxnVMMenuItem }
 
-constructor TVMMenu.Create(const Value: TMenu);
+
+constructor TAxnVMMenuItem.Create(Value: TAxnM);
 begin
-  Menu := Value;
+  inherited Create(Value);
+  MenuItem := TAxnMMenuItem(Value);
   FHModule := 0;
+
 end;
 
-destructor TVMMenu.Destroy;
+destructor TAxnVMMenuItem.Destroy;
 begin
   if FHModule <> 0 then
     UnloadPackage(FHModule);
   inherited;
 end;
 
-procedure TVMMenu.Ejecutar;
+procedure TAxnVMMenuItem.Ejecutar;
 Var
 //  Proc : FARPROC;
   Proc : Pointer;
 begin
   if FHModule = 0 then
-    FHModule := LoadPackage(Menu.Descripcion);
+    FHModule := LoadPackage(MenuItem.Descripcion);
   if FHModule <> 0 then
   begin
     Proc := GetProcAddress(FHModule,'');
@@ -68,17 +97,45 @@ begin
   end;
 end;
 
-function TVMMenu.GetMenu: TMenu;
+function TAxnVMMenuItem.GetMenuItem: TAxnMMenuItem;
 begin
-  Result := TMenu(AxnMCTL)
+  Result := TAxnMMenuItem(AxnMCTL)
 end;
 
-procedure TVMMenu.SetMenu(const Value: TMenu);
+procedure TAxnVMMenuItem.SetMenuItem(const Value: TAxnMMenuItem);
 begin
   SetAxnMCTL(Value);
-  Menu.Mod0_Id := Value.Mod0_Id;
-  Menu.Men0_Id := Value.Men0_Id;
-//  Menu.Menus := Value.Menus;
+  MenuItem.Mod0_Id := Value.Mod0_Id;
+  MenuItem.Men0_Id := Value.Men0_Id;
+  MenuItem.Menus := Value.Menus;
+end;
+
+function TAxnVMMenuItem.SubMenu: TAxnVMMenus;
+begin
+  Result := TAxnVMMenus.Create(MenuItem.Menus);
+end;
+
+{ TViewModelMenu }
+
+
+function TViewModelMenu.GetMenu(Index: String): TAxnVMMenus;
+var
+  M :TModulo;
+  Lista : System.Generics.Collections.TObjectList<TAxnMMenuItem>;
+begin
+  M :=Session.Load<TModulo>(TdormCriteriaItem.NewCriteria('Codigo', coEqual,Index));
+  Lista := Session.LoadList<TAxnMMenuItem>(TdormCriteriaItem.NewCriteria('Mod0_Id', coEqual,M.ID)._And('Men0_Id', coIsNull,''));
+  Result := TAxnVMMenus.Create(Lista);
+end;
+
+
+{ TAxnVMMenus }
+
+{ TAxnVMMenus }
+
+function TAxnVMMenus.NewItem(const Value: TAxnMMenuItem): TAxnVMMenuItem;
+begin
+  Result := TAxnVMMenuItem.Create(Value);
 end;
 
 end.

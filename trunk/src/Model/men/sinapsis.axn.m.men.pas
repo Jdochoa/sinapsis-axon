@@ -11,21 +11,24 @@ uses
   dorm.ObjectStatus,
 
   sinapsis.axn.m,
-  sinapsis.axn.m.Catalogo;
+  sinapsis.axn.m.interfaz,
+  sinapsis.axn.m.Catalogo,
+  sinapsis.axn.m.men.interfaz
+  ;
 
 type
-  TMenu = class;
-  [ListOf('sinapsis.axn.m.mdl.TMenu')]
-  TMenus = class (TObjectList<TMenu>)
+  TAxnMMenuItem = class;
+  [ListOf('sinapsis.axn.m.men.TAxnMMenuItem')]
+  TMenus = class (TObjectList<TAxnMMenuItem>)
   private
-    function GetMenu(Index: string): TMenu;
+    function GetMenu(Index: string): TAxnMMenuItem;
   public
-    property Menu[Index:string]: TMenu read GetMenu;
+    property Menu[Index:string]: TAxnMMenuItem read GetMenu;
 
   end;
 
   [Entity('MEN_MEN0_MENU')]
-  TMenu = class (TAxnMCTL)
+  TAxnMMenuItem = class (TAxnMCTL, IAxnMMenuItem)
   private
     FObjStatus: TdormObjectStatus;
     FMod0_Id :Integer;
@@ -43,7 +46,7 @@ type
     [Column('Men0_Id')]
     property Men0_Id :Integer read FMen0_Id write FMen0_Id;
     [HasMany('Men0_ID',True)]
-    property Menus: TMenus read FMenus;
+    property Menus: TMenus read FMenus write FMenus;
   end;
 
 
@@ -51,9 +54,9 @@ implementation
 
 { TMenus }
 
-function TMenus.GetMenu(Index: string): TMenu;
+function TMenus.GetMenu(Index: string): TAxnMMenuItem;
 var
-  Menu :TMenu;
+  Menu :TAxnMMenuItem;
 begin
   for Menu in List do
   begin
@@ -65,7 +68,7 @@ end;
 
 { TMenu }
 
-constructor TMenu.Create;
+constructor TAxnMMenuItem.Create;
 begin
   FMenus := TMenus.Create(True);
 end;

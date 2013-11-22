@@ -10,7 +10,7 @@ uses
   sinapsis.axn.vm;
 
 type
-  TAxnCTLVM = class abstract(TAxnVM, IVMCatalogo)
+  TAxnVMCtl = class abstract(TAxnVM, IVMCatalogo)
   private
   protected
     procedure SetCodigo(const Value : String);
@@ -20,49 +20,78 @@ type
     function GetCodigo:String;
     function GetDescripcion:String;
     function GetAxnMCTL:TAxnMCTL;
+    procedure SetAxnM(const Value: TAxnM); override;
 
-    property AxnMCTL : TAxnMCTL read GetAxnMCTL write SetAxnMCTL;
+    property AxnMCTL : TAxnMCtl read GetAxnMCTL write SetAxnMCTL;
   public
+    constructor Create(Value : TAxnM);override;
     property Codigo: String read GetCodigo write SetCodigo;
     property Descripcion: String read GetDescripcion write SetDescripcion;
-
   end;
 
+  TAxnVMCtlLista<TVM: TAxnVMCtl; TM :TAxnMCtl > = class(TAxnMVLista<TVM,TM>)
+  private
+  protected
+    function NewItem(const Value: TM):TVM; override;
+  public
+  end;
 
 implementation
 
-{ TAxnCTLVM }
+{ TAxnVMCtl}
 
-function TAxnCTLVM.GetAxnMCTL: TAxnMCTL;
+constructor TAxnVMCtl.Create(Value: TAxnM);
+begin
+  inherited Create(Value);
+  AxnMCTL := TAxnMCTL(Value);
+end;
+
+function TAxnVMCtl.GetAxnMCTL: TAxnMCTL;
 begin
   Result := TAxnMCTL(AxnM);
 end;
 
-function TAxnCTLVM.GetCodigo: String;
+function TAxnVMCtl.GetCodigo: String;
 begin
   Result :=  AxnMCTL.Codigo;
 end;
 
-function TAxnCTLVM.GetDescripcion: String;
+function TAxnVMCtl.GetDescripcion: String;
 begin
   Result :=  AxnMCTL.Descripcion;
 end;
 
-procedure TAxnCTLVM.SetAxnMCTL(const Value: TAxnMCTL);
+procedure TAxnVMCtl.SetAxnM(const Value: TAxnM);
 begin
-  AxnM := TAxnM(Value);
-  AxnMCTL.Codigo := Value.Codigo;
-  AxnMCTL.Descripcion := Value.Descripcion;
+  inherited;
+  TAxnMCTL(FAxnM).Codigo := TAxnMCTL(Value).Codigo;
+  TAxnMCTL(FAxnM).Descripcion := TAxnMCTL(FAxnM).Descripcion;
 end;
 
-procedure TAxnCTLVM.SetCodigo(const Value: String);
+procedure TAxnVMCtl.SetAxnMCTL(const Value: TAxnMCTL);
+begin
+  AxnM := Value;
+end;
+
+procedure TAxnVMCtl.SetCodigo(const Value: String);
 begin
   AxnMCTL.Codigo := Value;
 end;
 
-procedure TAxnCTLVM.SetDescripcion(const Value: String);
+procedure TAxnVMCtl.SetDescripcion(const Value: String);
 begin
   AxnMCTL.Descripcion:= Value;
+end;
+
+
+{ TAxnVMCtlLista<T, T1> }
+
+
+{ TAxnVMCtlLista<TVM, TM> }
+
+function TAxnVMCtlLista<TVM, TM>.NewItem(const Value: TM): TVM;
+begin
+  Result := TAxnVMCtl.Create(Value);
 end;
 
 end.

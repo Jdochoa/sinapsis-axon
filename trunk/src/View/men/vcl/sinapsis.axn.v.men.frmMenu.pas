@@ -9,15 +9,31 @@ uses
   System.Variants,
   System.Classes,
   System.Actions,
+  System.Generics.Collections,
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
   Vcl.Dialogs,
   Vcl.ActnList,
   Vcl.Menus,
+  Vcl.StdActns,
+
+  Spring.Services,
+  Spring.Container,
+  Spring.DesignPatterns,
+	Spring.Collections,
+  Spring.Collections.Lists,
+
   sinapsis.axn.vm.men,
-  Spring.DesignPatterns, Vcl.StdActns
+
+  dorm,
+  dorm.Commons
+
   ;
+const
+   _ConfFile =  'E:\Sinapsis\axn\cnf\axn.sqlite3.conf';
+   _Origen = 'Origen';
+   _Destino = 'Destino';
 
 type
   TfrmMenu = class(TForm)
@@ -31,10 +47,12 @@ type
     procedure aMenuExecute(Sender: TObject);
     procedure FormPaint(Sender: TObject);
   private
+    FPersonalidad: String;
     { Private declarations }
   public
     { Public declarations }
     procedure CreaMenu;
+    property Personalidad: String read FPersonalidad;
   end;
 
 var
@@ -52,44 +70,58 @@ begin
 end;
 
 procedure TfrmMenu.CreaMenu;
-  function Accion(Menu:TVMMenu; Categoria:string):TAction;
+var
+    VMMenu : TViewModelMenu;
+
+  function Accion(Menu:TAxnVMMenuItem; Categoria:string):TAction;
   begin
       Result := TAction.Create(acMenu);
-      Result.Caption := Menu.Menu.Descripcion;
-      Result.Hint := Menu.Menu.Codigo;
-      Result.Tag  := Menu.Menu.Id;
+      Result.Caption := Menu.Descripcion;
+      Result.Hint := Menu.Codigo;
+      Result.Tag  := Menu.Id;
       Result.Category := Categoria;
   end;
-  procedure subMenu(Menu:TVMMenu; MenuItem :TMenuItem);
+  procedure SubMenu(Menu:TAxnVMMenus; Item :TComponent; Categoria:String);
   var
-    Men0:TVMMenu;
+    MI : TAxnVMMenuItem;
     it : TMenuItem;
   begin
-    for Men0 in TSingleton.GetInstance<TVMMen>.SubMenu[Menu] do
+    for MI in Menu do
     begin
-      it := TMenuItem.Create(MenuItem);
-      it.Action := Accion(Men0,Menu.Menu.Descripcion);
-      it.Action.OnExecute :=aMenuExecute;
-      MenuItem.Add(it);
-      subMenu(Men0,it);
+        it := TMenuItem.Create(Item);
+        it.Action := Accion(MI,Categoria);
+        it.Action.OnExecute :=aMenuExecute;
+        if Item is TMenuItem then
+            (Item as TMenuItem).Add(it)
+        else
+          (Item as TMainMenu).Items.Add(it);
+        VMMenu.LoadRelation(MI.MenuItem, [drHasMany], False);
+        if MI.MenuItem.Menus.Count > 0 then
+          subMenu(MI.SubMenu, It, MI.Descripcion);
     end;
   end;
 var
-  it : TMenuItem;
-  Men0 : TVMMenu;
+  MenuItem : TAxnVMMenuItem;
 begin
-  for Men0 in TSingleton.GetInstance<TVMMen>.Menu['cxc'] do
-  begin
-      it := TMenuItem.Create(mmMenu);
-      it.Action := Accion(Men0,'Menu');
-      it.Action.OnExecute :=aMenuExecute;
-      mmMenu.Items.Add(it);
-      subMenu(Men0, it);
+  VMMenu := TViewModelMenu.Create;
+  try
+    SubMenu(VMMenu.Menu[Personalidad], mmMenu,'Menu');
+  finally
+    VMMenu.Free;
   end;
 end;
 
 procedure TfrmMenu.FormCreate(Sender: TObject);
 begin
+    GlobalContainer.RegisterType<TSession>.AsSingleton.Implements<IInterface>('Base').DelegateTo
+    (
+      function: TSession
+      begin
+          Result := TSession.CreateConfigured(_ConfFile,deDevelopment);
+      end
+    );
+  GlobalContainer.Build;
+  FPersonalidad := 'cxc';
   CreaMenu;
 end;
 
