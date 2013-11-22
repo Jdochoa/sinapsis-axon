@@ -11,6 +11,8 @@ Index: source/dorm.INC
 +{.$DEFINE LINK_INTERBASEUIB_ADAPTER }
 +{.$DEFINE LINK_SQLITE3_ADAPTER}
  
+ 
+ 
  // requires delphi ent or better - NOT YET SUPPORTED
  { . $DEFINE LINK_SQLSERVER_ADAPTER }
 Index: source/dorm.pas
