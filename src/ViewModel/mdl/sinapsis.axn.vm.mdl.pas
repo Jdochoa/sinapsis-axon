@@ -33,7 +33,7 @@ type
   end;
 
 
-  TVMModulo = class (TAxnCTLVM)
+  TVMModulo = class (TAxnVMCtl)
   private
 //    FModulo : TModulo;
     FAxnFile : TAxnFile;

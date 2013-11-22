@@ -4,7 +4,7 @@ interface
 uses
 //  System.Generics.Collections,
   Spring.Collections,
-  Spring.Collections.Lists,
+//  Spring.Collections.Lists,
   sinapsis.axn.common.clases
   ;
 
@@ -27,9 +27,9 @@ type
 
   IAxnMList<I : IAxnM> = interface
     ['{EB39FDB4-675C-45DA-83FE-D9CB63E935F0}']
-    procedure SetLista(Value : IList<I>);
-    function GetLista : IList<I>;
-    property Lista: IList<I> read GetLista write SetLista;
+//    procedure SetLista(Value : IList<I>);
+//    function GetLista : IList<I>;
+//    property Lista: IList<I> read GetLista write SetLista;
   end;
 
 

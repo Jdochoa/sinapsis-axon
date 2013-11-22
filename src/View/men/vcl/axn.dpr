@@ -15,7 +15,9 @@ uses
   sinapsis.axn.vm in '..\..\..\ViewModel\axn\sinapsis.axn.vm.pas',
   sinapsis.axn.vm.Catalogo in '..\..\..\ViewModel\axn\sinapsis.axn.vm.Catalogo.pas',
   sinapsis.axn.m.men in '..\..\..\Model\men\sinapsis.axn.m.men.pas',
-  sinapsis.axn.vm.men in '..\..\..\ViewModel\men\sinapsis.axn.vm.men.pas';
+  sinapsis.axn.vm.men in '..\..\..\ViewModel\men\sinapsis.axn.vm.men.pas',
+  sinapsis.axn.m.men.interfaz in '..\..\..\Model\men\sinapsis.axn.m.men.interfaz.pas',
+  sinapsis.axn.vm.ViewModel in '..\..\..\ViewModel\axn\sinapsis.axn.vm.ViewModel.pas';
 
 {$R *.res}
 

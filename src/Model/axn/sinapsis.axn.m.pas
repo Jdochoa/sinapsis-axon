@@ -6,7 +6,7 @@ uses
 
   dorm.Mappings,
   spring,
-  spring.Collections,
+//  spring.Collections,
   spring.Collections.Lists,
 
   sinapsis.axn.common.clases,
@@ -48,14 +48,11 @@ type
    property ModifiedAt:TDateTime read getModifiedAt;
   end;
 
-  {TAxnMList<T:TAxnM> = class(TObjectList<T>, IAxnMList<T>)
+  TAxnMList<T:TAxnM> = class(TObjectList<T>, IAxnMList<T>)
   private
   protected
-    procedure setLista(const Value :TObjectList<T>);
-    function getLista:TObjectList<T>;
   public
-    property Lista:TObjectList<T> read getLista write setLista;
-  end;}
+  end;
 
 
 implementation
@@ -86,8 +83,6 @@ function TAxnM.getModifiedBy: Integer;
 begin
   Result := FModifiedBy;
 end;
-
-
 
 procedure TAxnM.setId(Value: Integer);
 begin

@@ -3,7 +3,9 @@ unit sinapsis.axn.vm.interfaz;
 interface
 
 uses
-  Spring.Collections;
+  Spring.Collections,
+  Spring.Collections.Lists
+  ;
 type
   IVMAxn = interface
     ['{E48D0BD8-B3A8-4F50-B787-53EC2D393CA9}']
