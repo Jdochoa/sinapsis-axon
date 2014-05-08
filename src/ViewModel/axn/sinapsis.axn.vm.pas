@@ -92,7 +92,7 @@ constructor TAxnMVLista<TVM, TM>.Create(
   collection: System.Generics.Collections.TObjectList<TM>;
   ownsObjects: Boolean);
 begin
-  Create(TComparer<TVM>.Default, ownsObjects);
+//  Create(TComparer<TVM>.Default, ownsObjects);
   AddRange(collection);
 end;
 

@@ -6,6 +6,7 @@ uses
   Vcl.ActnList,
   System.Generics.Collections,
   System.Generics.Defaults,
+
   dorm,
   dorm.Collections,
   dorm.Commons,
@@ -13,18 +14,17 @@ uses
 
   Spring.DesignPatterns,
 
-  sinapsis.axn.m.mdl,
   sinapsis.axn.m.catalogo,
+  sinapsis.axn.m.mdl,
 
   sinapsis.axn.common.axnFile,
   sinapsis.axn.vm,
   sinapsis.axn.vm.catalogo
   ;
-
 const
-   _ConfFile =  'E:\Sinapsis\axn\cnf\axn.sqlite3.conf';
    _Origen = 'Origen';
    _Destino = 'Destino';
+
 
 type
 
@@ -119,7 +119,7 @@ Uses
 
 destructor TVMMdl.Destroy;
 begin
-  FSession.Free;
+//  FSession.Free;
   inherited;
 end;
 
@@ -252,7 +252,6 @@ end;
 
 constructor TVMMdl.Create;
 begin
-  FSession := TSession.CreateConfigured(_ConfFile,deDevelopment);
 end;
 
 function TVMMdl.GetUbicacion(Index: ICriteria): TVMUbicacion;
