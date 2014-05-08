@@ -16,6 +16,10 @@ uses
   sinapsis.axn.vm.mdl
 
   ;
+const
+   _ConfFile =  'E:\Sinapsis\axn\cnf\axn.sqlite3.conf';
+   _Origen = 'Origen';
+   _Destino = 'Destino';
 
 
 type

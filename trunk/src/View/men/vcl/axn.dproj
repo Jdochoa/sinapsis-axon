@@ -1,7 +1,7 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{57A2105D-95E6-446C-9590-778180328954}</ProjectGuid>
-        <ProjectVersion>14.3</ProjectVersion>
+        <ProjectVersion>15.1</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <MainSource>axn.dpr</MainSource>
         <Base>True</Base>
@@ -59,7 +59,6 @@
         <DCC_UsePackage>cxPivotGridChartRS17;cxTreeListdxBarPopupMenuRS17;dxCoreRS17;DBXSqliteDriver;dxThemeRS17;cxPageControldxBarPopupMenuRS17;dxPScxGridLnkRS17;fmx;IndySystem;dxPScxSchedulerLnkRS17;inetdbbde;vclib;DBXInterBaseDriver;DataSnapServer;DataSnapCommon;DataSnapClient;dxPScxTLLnkRS17;DataSnapProviderClient;DBXSybaseASEDriver;dxRibbonRS17;DbxCommonDriver;cxDataRS17;vclimg;dxServerModeRS17;dxSkinsdxBarPainterRS17;dbxcds;cxBarEditItemRS17;cxSchedulerRS17;MetropolisUILiveTile;cxPivotGridOLAPRS17;dxPSLnksRS17;dxPSdxDBTVLnkRS17;dxPSdxDBOCLnkRS17;vcldb;cxExportRS17;cxVerticalGridRS17;vcldsnap;dxPSCoreRS17;dxBarExtItemsRS17;dxGDIPlusRS17;DBXDb2Driver;dxNavBarRS17;DBXOracleDriver;CustomIPTransport;cxLibraryRS17;cxGridRS17;dsnap;IndyIPServer;cxSpreadSheetRS17;IndyCore;vcl;fmxase;IndyIPCommon;DBXMSSQLDriver;CloudService;dxSkinsdxDLPainterRS17;dxPScxCommonRS17;dcldxSkinsCoreRS17;dxPSdxOCLnkRS17;inetdbxpress;webdsnap;dxPScxVGridLnkRS17;Spring.Extensions;pckUCDataConnector_XE3;dxPScxExtCommonRS17;dxSkinscxSchedulerPainterRS17;adortl;dxPScxSSLnkRS17;Spring.Core;dxtrmdRS17;dxPSdxLCLnkRS17;dxPScxPCProdRS17;bindcompfmx;DataBindingsVCL170;vcldbx;Spring.Base;cxSchedulerGridRS17;rtl;dbrtl;DbxClientDriver;dxTabbedMDIRS17;bindcomp;inetdb;dxComnRS17;dxSkinsCoreRS17;dxBarRS17;dxdbtrRS17;DataBindings;DBXOdbcDriver;dxBarDBNavRS17;xmlrtl;dxorgcRS17;dxSkinsdxRibbonPainterRS17;svnui;ibxpress;IndyProtocols;DBXMySQLDriver;dxDockingRS17;dxLayoutControlRS17;bindengine;vclactnband;soaprtl;bindcompdbx;UIBD17Win32R;dxADOServerModeRS17;bindcompvcl;dxBarExtDBItemsRS17;dxPSPrVwRibbonRS17;vclie;dxPScxPivotGridLnkRS17;dxSpellCheckerRS17;cxPageControlRS17;vcltouch;dxSkinscxPCPainterRS17;websnap;dxTileControlRS17;dxmdsRS17;VclSmp;DBXInformixDriver;cxPivotGridRS17;dxPsPrVwAdvRS17;DataSnapConnectors;dxdborRS17;DBXFirebirdDriver;dsnapcon;inet;dorm_runtime_xe3;fmxobj;cxTreeListRS17;dxPSdxFCLnkRS17;vclx;cxEditorsRS17;svn;DBXSybaseASADriver;dxFlowChartRS17;fmxdae;dxSkinsdxNavBarPainterRS17;bdertl;dbexpress;DataSnapIndy10ServerTransport;dxDBXServerModeRS17;IndyIPClient;$(DCC_UsePackage)</DCC_UsePackage>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
@@ -82,7 +81,7 @@
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
         <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
-        <DCC_DebugInformation>false</DCC_DebugInformation>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
@@ -91,20 +90,6 @@
         <DCCReference Include="sinapsis.axn.v.men.frmMenu.pas">
             <Form>frmMenu</Form>
         </DCCReference>
-        <DCCReference Include="..\..\..\ViewModel\mdl\sinapsis.axn.vm.mdl.pas"/>
-        <DCCReference Include="..\..\..\Model\mdl\sinapsis.axn.m.mdl.pas"/>
-        <DCCReference Include="..\..\..\Common\sinapsis.axn.common.axnFile.pas"/>
-        <DCCReference Include="..\..\..\Model\axn\sinapsis.axn.m.catalogo.pas"/>
-        <DCCReference Include="..\..\..\Model\axn\sinapsis.axn.m.pas"/>
-        <DCCReference Include="..\..\..\Common\sinapsis.axn.common.clases.pas"/>
-        <DCCReference Include="..\..\..\Model\axn\sinapsis.axn.m.interfaz.pas"/>
-        <DCCReference Include="..\..\..\ViewModel\axn\sinapsis.axn.vm.interfaz.pas"/>
-        <DCCReference Include="..\..\..\ViewModel\axn\sinapsis.axn.vm.pas"/>
-        <DCCReference Include="..\..\..\ViewModel\axn\sinapsis.axn.vm.Catalogo.pas"/>
-        <DCCReference Include="..\..\..\Model\men\sinapsis.axn.m.men.pas"/>
-        <DCCReference Include="..\..\..\ViewModel\men\sinapsis.axn.vm.men.pas"/>
-        <DCCReference Include="..\..\..\Model\men\sinapsis.axn.m.men.interfaz.pas"/>
-        <DCCReference Include="..\..\..\ViewModel\axn\sinapsis.axn.vm.ViewModel.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
