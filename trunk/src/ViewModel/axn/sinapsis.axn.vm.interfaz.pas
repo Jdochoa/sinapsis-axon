@@ -4,27 +4,39 @@ interface
 
 uses
   Spring.Collections,
-  Spring.Collections.Lists
+  sinapsis.axn.model.interfaz,
+  sinapsis.axn.m.interfaz
   ;
 type
-  IVMAxn = interface
+  IAxnVM = interface
+    ['{F2071437-AB33-4E3A-BE37-092D3CF9A979}']
+    function GetModel : IAxnModel;
+    procedure SetModel(const Value : IAxnModel);
+//    function Create : Boolean;
+    function Read   : Boolean;
+//    function Update : Boolean;
+//    function Delete : Boolean;
+    property Model: IAxnModel read GetModel write SetModel;
+  end;
+
+  IAxnVMSingle = interface(IAxnVM)
     ['{E48D0BD8-B3A8-4F50-B787-53EC2D393CA9}']
     procedure SetId(const Value : Integer);
     function GetId:Integer;
+    function Read(const Id : Integer)   : Boolean;
     property ID: Integer read GetID write SetID;
   end;
 
-  IVMCatalogo = interface(IVMAxn)
-    ['{12F18BD0-AF93-4B53-A4EF-019E35E8D2FB}']
-    procedure SetCodigo(const Value : String);
-    procedure SetDescripcion(const Value : String);
-
-    function GetCodigo:String;
-    function GetDescripcion:String;
-
-    property Codigo: String read GetCodigo write SetCodigo;
-    property Descripcion: String read GetDescripcion write SetDescripcion;
+  IAxnVMCollection<T: IAxnM> = interface(IAxnVM)
+    ['{E6DEB531-AFF1-4083-9D15-EF0BF75513B4}']
+    function GetLista:ICollection<T>;
+    function GetClase : TClass;
+    procedure SetLista(const Value :ICollection<T>);
+    procedure SetClase(const Value :TClass);
+    property Lista: ICollection<T> read GetLista write SetLista;
+    property Clase : TClass read GetClase write SetClase;
   end;
+(*
 
   IVMLCatalogo = IDictionary<string,IVMCatalogo>;
 
@@ -71,7 +83,7 @@ type
     property Detalle: IVMLDetalles read GetDetalle write SetDetalle;
 
   end;
-
+*)
 implementation
 
 end.

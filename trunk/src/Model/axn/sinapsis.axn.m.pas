@@ -2,13 +2,7 @@ unit sinapsis.axn.m;
 
 interface
 uses
-//  System.Generics.Collections,
-
   dorm.Mappings,
-  spring,
-//  spring.Collections,
-  spring.Collections.Lists,
-
   sinapsis.axn.common.clases,
   sinapsis.axn.m.interfaz;
 
@@ -48,11 +42,11 @@ type
    property ModifiedAt:TDateTime read getModifiedAt;
   end;
 
-  TAxnMList<T:TAxnM> = class(TObjectList<T>, IAxnMList<T>)
-  private
-  protected
-  public
-  end;
+//  TAxnMList<T:TAxnM> = class(TObjectList<T>, IAxnMList<T>)
+//  private
+//  protected
+//  public
+//  end;
 
 
 implementation
