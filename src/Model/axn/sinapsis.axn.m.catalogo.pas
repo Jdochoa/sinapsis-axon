@@ -3,8 +3,9 @@ unit sinapsis.axn.m.catalogo;
 interface
 uses
     dorm.Mappings,
-    sinapsis.axn.m.Interfaz,
-    sinapsis.axn.m;
+    sinapsis.axn.m,
+    sinapsis.axn.m.Catalogo.Interfaz
+    ;
 
 type
   [Entity('AXN_CATALOGO')]

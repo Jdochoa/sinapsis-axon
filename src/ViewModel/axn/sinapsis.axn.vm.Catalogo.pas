@@ -3,36 +3,38 @@ unit sinapsis.axn.vm.Catalogo;
 interface
 uses
   sinapsis.axn.common.clases,
-  sinapsis.axn.m,
+  sinapsis.axn.m.interfaz,
+  sinapsis.axn.m.Catalogo.interfaz,
   sinapsis.axn.m.Catalogo,
 
   sinapsis.axn.vm.Interfaz,
-  sinapsis.axn.vm;
+  sinapsis.axn.vm,
+  sinapsis.axn.vm.Catalogo.Interfaz
+  ;
 
 type
-  TAxnVMCtl = class abstract(TAxnVM, IVMCatalogo)
+  TAxnVMCtl = class abstract(TAxnVMSingle, IAxnVMCtl)
   private
   protected
     procedure SetCodigo(const Value : String);
     procedure SetDescripcion(const Value : String);
-    procedure SetAxnMCTL(const Value : TAxnMCTL);
+    procedure SetAxnMCTL(const Value : IAxnMCTL);
 
     function GetCodigo:String;
     function GetDescripcion:String;
-    function GetAxnMCTL:TAxnMCTL;
-    procedure SetAxnM(const Value: TAxnM); override;
+    function GetAxnMCTL:IAxnMCTL;
+//    procedure SetAxnM(const Value: IAxnM); override;
 
-    property AxnMCTL : TAxnMCtl read GetAxnMCTL write SetAxnMCTL;
+    property AxnMCTL : IAxnMCtl read GetAxnMCTL write SetAxnMCTL;
   public
-    constructor Create(Value : TAxnM);override;
+    constructor Create(Value : IAxnM);override;
     property Codigo: String read GetCodigo write SetCodigo;
     property Descripcion: String read GetDescripcion write SetDescripcion;
   end;
 
-  TAxnVMCtlLista<TVM: TAxnVMCtl; TM :TAxnMCtl > = class(TAxnMVLista<TVM,TM>)
+  TAxnVMCltColl<T: IAxnMCtl> = class(TAxnVMCollection<T> ,IAxnVMCollection<T>)
   private
   protected
-    function NewItem(const Value: TM):TVM; override;
   public
   end;
 
@@ -40,15 +42,15 @@ implementation
 
 { TAxnVMCtl}
 
-constructor TAxnVMCtl.Create(Value: TAxnM);
+constructor TAxnVMCtl.Create(Value: IAxnM);
 begin
   inherited Create(Value);
-  AxnMCTL := TAxnMCTL(Value);
+  AxnMCTL := IAxnMCTL(Value);
 end;
 
-function TAxnVMCtl.GetAxnMCTL: TAxnMCTL;
+function TAxnVMCtl.GetAxnMCTL: IAxnMCTL;
 begin
-  Result := TAxnMCTL(AxnM);
+  Result := IAxnMCTL(AxnM);
 end;
 
 function TAxnVMCtl.GetCodigo: String;
@@ -61,14 +63,14 @@ begin
   Result :=  AxnMCTL.Descripcion;
 end;
 
-procedure TAxnVMCtl.SetAxnM(const Value: TAxnM);
-begin
-  inherited;
-  TAxnMCTL(FAxnM).Codigo := TAxnMCTL(Value).Codigo;
-  TAxnMCTL(FAxnM).Descripcion := TAxnMCTL(FAxnM).Descripcion;
-end;
+//procedure TAxnVMCtl.SetAxnM(const Value: IAxnM);
+//begin
+//  inherited;
+//  IAxnMCTL(FAxnM).Codigo := IAxnMCTL(Value).Codigo;
+//  IAxnMCTL(FAxnM).Descripcion := IAxnMCTL(FAxnM).Descripcion;
+//end;
 
-procedure TAxnVMCtl.SetAxnMCTL(const Value: TAxnMCTL);
+procedure TAxnVMCtl.SetAxnMCTL(const Value: IAxnMCTL);
 begin
   AxnM := Value;
 end;
@@ -81,17 +83,6 @@ end;
 procedure TAxnVMCtl.SetDescripcion(const Value: String);
 begin
   AxnMCTL.Descripcion:= Value;
-end;
-
-
-{ TAxnVMCtlLista<T, T1> }
-
-
-{ TAxnVMCtlLista<TVM, TM> }
-
-function TAxnVMCtlLista<TVM, TM>.NewItem(const Value: TM): TVM;
-begin
-  Result := TAxnVMCtl.Create(Value);
 end;
 
 end.

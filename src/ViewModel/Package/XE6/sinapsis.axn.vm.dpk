@@ -1,0 +1,45 @@
+package sinapsis.axn.vm;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Axon de Sinapsis: Core del ViewModel'}
+{$LIBSUFFIX '200'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  Spring.Base,
+  dbrtl,
+  sinapsis.axn.m,
+  sinapsis.axn.common,
+  sinapsis.axn.model;
+
+contains
+  sinapsis.axn.vm.interfaz in '..\..\axn\sinapsis.axn.vm.interfaz.pas',
+  sinapsis.axn.vm in '..\..\axn\sinapsis.axn.vm.pas';
+
+end.
+

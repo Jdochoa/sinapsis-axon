@@ -6,11 +6,11 @@ uses
   dorm.Mappings,
   Spring.Collections.Lists,
 
-  sinapsis.axon.m,
-  sinapsis.axon.m.int,
-  sinapsis.axon.m.org,
-  sinapsis.axon.m.trn,
-  sinapsis.axon.m.est
+  sinapsis.axn.m,
+//  sinapsis.axon.m.int,
+//  sinapsis.axon.m.org,
+//  sinapsis.axon.m.trn,
+//  sinapsis.axon.m.est
   ;
   
 type
