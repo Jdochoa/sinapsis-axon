@@ -15,13 +15,16 @@ type
     function getModifiedBy():Integer;
     function getModifiedAt():TDateTime;
     procedure setId(Value:Integer);
-
+    procedure setCreatedBy(Value :Integer);
+    procedure setCreatedAt(Value :TDateTime);
+    procedure setModifiedBy(Value :Integer);
+    procedure setModifiedAt(Value :TDateTime);
 
     property Id:Integer read getId write setId;
-    property CreatedBy:Integer read getCreatedBy;
-    property CreatedAt:TDateTime read getCreatedAt;
-    property ModifiedBy:Integer read getModifiedBy;
-    property ModifiedAt:TDateTime read getModifiedAt;
+    property CreatedBy:Integer read getCreatedBy write setCreatedBy;
+    property CreatedAt:TDateTime read getCreatedAt write setCreatedAt ;
+    property ModifiedBy:Integer read getModifiedBy write setModifiedBy;
+    property ModifiedAt:TDateTime read getModifiedAt write setModifiedAt;
   end;
 
 //  IAxnMList<I : IAxnM> = interface

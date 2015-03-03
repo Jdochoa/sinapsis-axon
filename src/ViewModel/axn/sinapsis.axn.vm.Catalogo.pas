@@ -1,7 +1,9 @@
-unit sinapsis.axn.vm.Catalogo;
+unit sinapsis.axn.vm.catalogo;
 
 interface
 uses
+  Spring.Collections,
+
   sinapsis.axn.common.clases,
   sinapsis.axn.m.interfaz,
   sinapsis.axn.m.Catalogo.interfaz,
@@ -13,52 +15,66 @@ uses
   ;
 
 type
-  TAxnVMCtl = class abstract(TAxnVMSingle, IAxnVMCtl)
+//  TAxnVMCtl<T : IAxnMCtl> = class {abstract}(TAxnVMSingle<T>, IAxnVMCtl<T>)
+  TAxnVMCtl = class {abstract}(TAxnVMSingle, IAxnVMCtl)
   private
   protected
+    procedure SetAxnMCTL(const Value : TAxnMCtl);
     procedure SetCodigo(const Value : String);
     procedure SetDescripcion(const Value : String);
-    procedure SetAxnMCTL(const Value : IAxnMCTL);
 
+    function GetAxnMCTL:TAxnMCtl;
     function GetCodigo:String;
     function GetDescripcion:String;
-    function GetAxnMCTL:IAxnMCTL;
 //    procedure SetAxnM(const Value: IAxnM); override;
 
-    property AxnMCTL : IAxnMCtl read GetAxnMCTL write SetAxnMCTL;
   public
-    constructor Create(Value : IAxnM);override;
+    constructor Create(Value : TAxnMCtl); //overload;
     property Codigo: String read GetCodigo write SetCodigo;
     property Descripcion: String read GetDescripcion write SetDescripcion;
+    property AxnMCtl : TAxnMCtl read GetAxnMCTL write SetAxnMCTL;
   end;
 
-  TAxnVMCltColl<T: IAxnMCtl> = class(TAxnVMCollection<T> ,IAxnVMCollection<T>)
+  TAxnVMCltColl<T: TAxnMCtl> = class(TAxnVMCollection<T> ,IAxnVMCollection<T>)
   private
   protected
   public
+  end;
+
+  TAxnSrvCtl = class (TAxnSrvMdl,IAxnSrvCtl)
+  private
+  protected
+    function InternalCodigo<T: TAxnMCtl, constructor>(const Value:String):T;
+  public
+    function Id(const Value : Integer):IAxnVMCtl;//<IAxnMCtl>;
+    function Codigo(const Value:String):IAxnVMCtl;//<IAxnMCtl>;
   end;
 
 implementation
+uses
+   sinapsis.axn.model.SORM;
 
 { TAxnVMCtl}
 
-constructor TAxnVMCtl.Create(Value: IAxnM);
+constructor TAxnVMCtl{<T>}.Create(Value: TAxnMCtl);
 begin
-  inherited Create(Value);
-  AxnMCTL := IAxnMCTL(Value);
+  AxnMCTL := TAxnMCTL(Value);
 end;
 
-function TAxnVMCtl.GetAxnMCTL: IAxnMCTL;
+function TAxnVMCtl{<T>}.GetAxnMCTL: TAxnMCtl;
 begin
-  Result := IAxnMCTL(AxnM);
+  if AxnM is TAxnMCtl then
+    Result := TAxnMCtl(AxnM)
+  else
+    Result := nil;
 end;
 
-function TAxnVMCtl.GetCodigo: String;
+function TAxnVMCtl{<T>}.GetCodigo: String;
 begin
   Result :=  AxnMCTL.Codigo;
 end;
 
-function TAxnVMCtl.GetDescripcion: String;
+function TAxnVMCtl{<T>}.GetDescripcion: String;
 begin
   Result :=  AxnMCTL.Descripcion;
 end;
@@ -70,19 +86,43 @@ end;
 //  IAxnMCTL(FAxnM).Descripcion := IAxnMCTL(FAxnM).Descripcion;
 //end;
 
-procedure TAxnVMCtl.SetAxnMCTL(const Value: IAxnMCTL);
+procedure TAxnVMCtl{<T>}.SetAxnMCTL(const Value: TAxnMCtl);
 begin
-  AxnM := Value;
+  TAxnMCtl(FAxnM) := Value;
 end;
 
-procedure TAxnVMCtl.SetCodigo(const Value: String);
+procedure TAxnVMCtl{<T>}.SetCodigo(const Value: String);
 begin
   AxnMCTL.Codigo := Value;
 end;
 
-procedure TAxnVMCtl.SetDescripcion(const Value: String);
+procedure TAxnVMCtl{<T>}.SetDescripcion(const Value: String);
 begin
   AxnMCTL.Descripcion:= Value;
 end;
 
+{ TAxnSrvCtl }
+
+function TAxnSrvCtl.Codigo(const Value: String): IAxnVMCtl;//<IAxnMCtl>;
+begin
+  Result := TAxnVMCtl.Create(InternalCodigo<TAxnMCtl>(Value));
+end;
+
+function TAxnSrvCtl.Id(const Value: Integer): IAxnVMCtl;//<IAxnMCtl>;
+begin
+  Result := TAxnVMCtl.Create(InternalId<TAxnMCtl>(Value));
+end;
+
+
+function TAxnSrvCtl.InternalCodigo<T>(const Value: String): T;
+Var
+  D : IList<T>;
+begin
+  D := Model.Load<T>(Value);
+  Result :=  Model.Load<T>(Value).FirstOrDefault;
+end;
+
 end.
+
+
+

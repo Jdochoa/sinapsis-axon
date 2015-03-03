@@ -27,6 +27,7 @@ package sinapsis.axn.m.ctl;
 {$ENDIF IMPLICITBUILDING}
 {$DESCRIPTION 'Axon de Sinapsis: Base del modelo de los catalogos'}
 {$LIBSUFFIX '200'}
+{$RUNONLY}
 {$IMPLICITBUILD ON}
 
 requires

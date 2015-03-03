@@ -2,7 +2,7 @@ unit sinapsis.axn.m.clt.interfaz;
 
 interface
 uses
-  sinapsis.axn.m.interfaz;
+  sinapsis.axn.m.catalogo.interfaz;
 
 type
   IAxnMCli0 = interface(IAxnMCtl)

@@ -25,19 +25,21 @@ package sinapsis.axn.model;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'Model Manager Sinapsis Axon'}
+{$DESCRIPTION 'Axon de Sinapsis: Modelo'}
 {$LIBSUFFIX '200'}
+{$RUNONLY}
 {$IMPLICITBUILD ON}
 
 requires
   rtl,
-  Spring.Base,
   dbrtl,
-  dorm_runtime,
-  sinapsis.axn.m;
+  vcl,
+  vclimg,
+  UIBD20Win32R;
 
 contains
   sinapsis.axn.model.interfaz in '..\..\sinapsis.axn.model.interfaz.pas',
-  sinapsis.axn.modelDORM in '..\..\sinapsis.axn.modelDORM.pas';
+  sinapsis.axn.model in '..\..\sinapsis.axn.model.pas',
+  sinapsis.axn.model.SORM in '..\..\sinapsis.axn.model.SORM.pas';
 
 end.

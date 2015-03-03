@@ -9,61 +9,74 @@ uses
   Spring.Collections,
   Spring.Collections.Base,
   Spring.Collections.Lists,
-  Spring.Services,
-  Spring.Container,
-  Spring.Container.Common,
+  Spring.Persistence.Core.Interfaces,
+  Spring.Persistence.Core.Session,
+  Spring.Persistence.Core.DatabaseManager,
+  Spring.Persistence.Core.ConnectionFactory,
+  Spring.Persistence.Criteria.Properties,
+  Spring.Persistence.Criteria.Restrictions,
+  Spring.Persistence.Criteria.Criterion.Conjunction,
+  Spring.Persistence.Criteria.Criterion.Disjunction,
+  Spring.Persistence.Adapters.UIB,
+  uib,
 
-  sinapsis.axn.model.interfaz,
-  sinapsis.axn.modelDORM,
 
-  sinapsis.axn.m.catalogo.interfaz,
-  sinapsis.axn.m.catalogo,
-  sinapsis.axn.m.arc.interfaz,
-  sinapsis.axn.m.arc,
 
-  sinapsis.axn.vm.catalogo.interfaz,
-  sinapsis.axn.vm.catalogo
-  ;
 
-procedure RegistraContenedor;
-begin
-  GlobalContainer.RegisterType<TAxnModelFactoryDORM>.Implements<IAxnModelFactory>('DORM').AsSingleton();
-  GlobalContainer.Build;
-end;
-Procedure Test1(Fabrica:IAxnModelFactory);
+  sinapsis.axn.m.clt.cliente,
+  sinapsis.axn.vm.catalogo.interfaz in '..\axn\sinapsis.axn.vm.catalogo.interfaz.pas',
+  sinapsis.axn.vm.Catalogo in '..\axn\sinapsis.axn.vm.Catalogo.pas',
+  sinapsis.axn.vm.interfaz in '..\axn\sinapsis.axn.vm.interfaz.pas',
+  sinapsis.axn.vm in '..\axn\sinapsis.axn.vm.pas',
+  sinapsis.axn.vm.clt.cliente in '..\clt\sinapsis.axn.vm.clt.cliente.pas',
+  sinapsis.axn.vm.clt.interfaz in '..\clt\sinapsis.axn.vm.clt.interfaz.pas',
+  sinapsis.axn.model.interfaz in '..\..\Model\sinapsis.axn.model.interfaz.pas',
+  sinapsis.axn.model in '..\..\Model\sinapsis.axn.model.pas',
+  sinapsis.axn.model.SORM in '..\..\Model\sinapsis.axn.model.SORM.pas';
+
+procedure Test;
 var
-  VistaModelo:TAxnVMCltColl<TAxnMCtl>;
-  Modelo:IAxnModel;
-  Arc0 : TAxnMCtl;
-  Arc0L : IList<IAxnMCtl>;
-//  Arc0L : ICollection<IAxnMCtl>;
-Begin
-  VistaModelo := TAxnVMCltColl<TAxnMCtl>.Create();
-  VistaModelo.Model:= Fabrica.CreateAxnModel(deDevelopment,'\Sinapsis\axn\cnf\axn.sqlite3.conf');
-  VistaModelo.Clase := TArchivo;
-  if VistaModelo.Read then
-  begin
+  Pkg : IAxnPkgClt;
+  Mdl : IAxnSrvClt;
+  Cli0   : IAxnVMCli0;
+  Model : TAxnModel;
+  Cl : TAxnMCli0;
+  cls : IList<TAxnMCli0>;
 
-//  VistaModelo.Lista.w
-//      Arc0L := VistaModelo.Lista;
-//  Arc0L := TCollections.CreateObjectList<TArchivo>(True);
-////  Arc0L := TCollections.CreateInterfaceList<IArchivo>();
-//
-//  Modelo.LoadList(TArchivo,TObject(Arc0L));
-//
-  for Arc0 in VistaModelo.Lista.Where(function (const Archivo:TAxnMCtl):Boolean
-                           begin
-                                Result := True;//Archivo.Ejecutable = 'F';
-                           end) do
-    WriteLn(Arc0.Codigo+'-'+Arc0.Descripcion);
-  end;
-  readln;
-End;
+  FConnection: IDBConnection;
+  FDatabase: TUIBDataBase;
+  FSession : TSession;
+
+begin
+
+//  FConnection := TConnectionFactory.GetInstanceFromFilename(dtUIB, 'C:\Sinapsis\axn\cnf\axn.firebird.json');
+//  FSession := TSession.Create(FConnection);
+//  Cls := fSession.FindWhere<TAxnMCli0>(GetProp('ID') = '2').ToList;
+//  cls := FSession.GetList<TAxnMCli0>('Select * from Clt_cli0_cliente where id = 2', []);
+////  Cls := FSession.FindAll<TAxnMCli0>;
+
+
+  Model := TAxnModel.Create(dtUIB, 'C:\Sinapsis\axn\cnf\axn.firebird.json');
+//  Cls :=  Model.Load<TAxnMCli0>('select * from clt_cli0_cliente where id = 2',[]);
+  Cls :=  Model.Load<TAxnMCli0>(2);
+  Cl := Cls.FirstOrDefault;
+//  writeln(Cl.NIT);
+  Cli0 := TAxnVMCli0.Create(Cl);
+  writeln(Cli0.NIT);
+
+//  Pkg := TAxnPkgClt.Create;
+//  Mdl := TAxnSrvClt(Pkg.SrvMdl['CLI0']);
+  Mdl := TAxnSrvClt.Create(Model);
+  Cli0 := Mdl.Id(2);
+  writeln(Cli0.Nit);
+
+
+end;
+
 
 begin
   try
-    RegistraContenedor;
-    Test1(ServiceLocator.GetService<IAxnModelFactory>('DORM'));
+    Test;
   except
     on E: Exception do
       Writeln(E.ClassName, ': ', E.Message);

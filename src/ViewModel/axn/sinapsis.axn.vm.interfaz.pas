@@ -5,29 +5,39 @@ interface
 uses
   Spring.Collections,
   sinapsis.axn.model.interfaz,
-  sinapsis.axn.m.interfaz
+  sinapsis.axn.model,
+  sinapsis.axn.m.interfaz,
+  sinapsis.axn.m
   ;
 type
+
+  IAxnVMEdit = Interface
+    ['{7147B716-8C96-4641-9B94-006B1DAC9484}']
+    function Create : Boolean;
+    function Read   : Boolean;
+    function Update : Boolean;
+    function Delete : Boolean;
+  End;
+
   IAxnVM = interface
     ['{F2071437-AB33-4E3A-BE37-092D3CF9A979}']
-    function GetModel : IAxnModel;
-    procedure SetModel(const Value : IAxnModel);
-//    function Create : Boolean;
-    function Read   : Boolean;
-//    function Update : Boolean;
-//    function Delete : Boolean;
-    property Model: IAxnModel read GetModel write SetModel;
+    function GetModel : TAxnModel;
+    procedure SetModel(const Value : TAxnModel);
+    property Model: TAxnModel read GetModel write SetModel;
   end;
 
-  IAxnVMSingle = interface(IAxnVM)
+//  IAxnVMSingle<T: IAxnM> = interface//(IAxnVM)
+  IAxnVMSingle = interface//(IAxnVM)
     ['{E48D0BD8-B3A8-4F50-B787-53EC2D393CA9}']
+    function GetAxnM : TAxnM;
+    procedure SetAxnM(const Value : TAxnM);
     procedure SetId(const Value : Integer);
     function GetId:Integer;
-    function Read(const Id : Integer)   : Boolean;
     property ID: Integer read GetID write SetID;
+    property AxnM : TAxnM read GetAxnM write SetAxnM;
   end;
 
-  IAxnVMCollection<T: IAxnM> = interface(IAxnVM)
+  IAxnVMCollection<T: TAxnM> = interface//(IAxnVM)
     ['{E6DEB531-AFF1-4083-9D15-EF0BF75513B4}']
     function GetLista:ICollection<T>;
     function GetClase : TClass;
@@ -36,54 +46,24 @@ type
     property Lista: ICollection<T> read GetLista write SetLista;
     property Clase : TClass read GetClase write SetClase;
   end;
-(*
 
-  IVMLCatalogo = IDictionary<string,IVMCatalogo>;
+  IAxnSrvMdl = Interface(IAxnVM)
+//  IAxnVMSubModulo = Interface(IAxnVM)
+    ['{8DCD035D-7AE4-443F-96D3-8F96DD559F9A}']
+    function Id(const Value : Integer):IAxnVMSingle;
+    function All(const Value: Integer):IAxnVMCollection<TAxnM>;
+  End;
 
-  IVMDetalle = interface
-    ['{3A9A9505-9407-4342-9327-15FEC0FF9B21}']
-    procedure SetId(const Value : Integer);
-
-    function GetId:Integer;
-
-    property Id: Integer read GetId write SetId;
-  end;
-
-  IVMLDetalle = IDictionary<string,IVMDetalle>;
-  IVMLDetalles = IDictionary<string,IVMDetalle>;
-
-  IVMDocumento = interface
-    ['{CB4FEBF1-180B-4EE8-A932-443B62EDCDE6}']
-    procedure SetId(const Value : Integer);
-    procedure SetSerie(const Value : String);
-    procedure SetCorrelativo(const Value : Integer);
-    procedure SetDocumento(const Value : String);
-    procedure SetFecha(const Value : TDate);
-    procedure SetDescripcion(const Value : String);
-    procedure SetCatalogo(const Value : IVMLCatalogo);
-    procedure SetDetalle (const Value : IVMLDetalles);
+  IAxnPkg = Interface(IAxnVM)
+//  IAxnVMModulo = Interface(IAxnVM)
+    ['{1561DC3A-FD07-449F-B10F-08B5A468D5B0}']
+//    procedure SetSrvMdl(Index : String; Value:IAxnSrvMdl);
+    function GetSrvMdl(Index:String):IAxnSrvMdl;
+    property SrvMdl[Index:String]:IAxnSrvMdl read GetSrvMdl;// write SetSrvMdl;
+  End;
 
 
-    function GetId : Integer;
-    function GetSerie : String;
-    function GetCorrelativo : Integer;
-    function GetDocumento : String;
-    function GetFecha : TDate;
-    function GetDescripcion : String;
-    function GetCatalogo : IVMLCatalogo;
-    function GetDetalle : IVMLDetalles;
 
-    property Id: Integer read GetId write SetId;
-    property Serie: String read GetSerie write SetSerie;
-    property Correlativo: Integer read GetCorrelativo write SetCorrelativo;
-    property Documento: String read GetDocumento write SetDocumento;
-    property Fecha: TDate read GetFecha write SetFecha;
-    property Descripcion: String read GetDescripcion write SetDescripcion;
-    property Catalogo: IVMLCatalogo read GetCatalogo write SetCatalogo;
-    property Detalle: IVMLDetalles read GetDetalle write SetDetalle;
-
-  end;
-*)
 implementation
 
 end.

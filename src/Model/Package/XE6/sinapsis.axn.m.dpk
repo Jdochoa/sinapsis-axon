@@ -27,13 +27,13 @@ package sinapsis.axn.m;
 {$ENDIF IMPLICITBUILDING}
 {$DESCRIPTION 'Axon de Sinapsis: Core del modelo'}
 {$LIBSUFFIX '200'}
+{$RUNONLY}
 {$IMPLICITBUILD ON}
 
 requires
   rtl,
   dbrtl,
-  dorm_runtime,
-  sinapsis.axn.common;
+  Spring.Persistence;
 
 contains
   sinapsis.axn.m.interfaz in '..\..\axn\sinapsis.axn.m.interfaz.pas',

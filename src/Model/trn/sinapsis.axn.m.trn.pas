@@ -2,44 +2,77 @@ unit sinapsis.axn.m.trn;
 
 
 interface
+{$I Model.inc}
 
 uses
-  dorm.Mappings,
-  Spring.Collections.Lists,
+  {$IFDEF Marshmallow}
+    Spring.Persistence.Mapping.Attributes,
+  {$ELSE}
+   {$IFDEF DORM}
+    dorm.Mappings,
+   {$ENDIF}
+  {$ENDIF}
   sinapsis.axn.m,
-  sinapsis.axn.m.cnf,
-  sinapsis.axn.m.org,
-  sinapsis.axn.m.est
+  sinapsis.axn.m.Catalogo,
+  sinapsis.axn.m.Trn.interfaz
   ;
 
 type
-  TTrnEmp = class;
+ { TTrnEmp = class;
   TTrnEmps = class(TObjectList<TTrnEmp>)
-  end;
-
-  [Entity('TRN_TRN0_TRANSACCION')]
-  TTransaccion = class(TAxonCatalogo)
+  end;}
+  {$IFDEF Marshmallow}
+    [Entity]
+    [Table('TRN_TRN0_TRANSACCION','')]
+  {$ELSE}
+   {$IFDEF DORM}
+    [Entity('TRN_TRN0_TRANSACCION')]
+    [NoAutomapping]
+   {$ENDIF}
+  {$ENDIF}
+  TAxnMTrn = class(TAxnMCTL, IAxnMTrn)
   private
-	  FMdl0_Id : integer;
-    FAfecta : Char;
-    FEst0_Id : integer;
-	  FModulo : TModulo;
-    FTrnEmps : TTrnEmps;
-    FEstado  : TEstado;
+    FFAfecta : TFAfecta;
+    FLineas : Integer;
+//	  FMdl0_Id : integer;
+//    FEst0_Id : integer;
+//	  FModulo : TModulo;
+//    FTrnEmps : TTrnEmps;
+//    FEstado  : TEstado;
   protected
-    [Column('MDL0_ID')]
-    property Mdl0_ID: Integer read FMdl0_Id write FMdl0_Id;
-  public
-    [Column('AFECTA')]
-    property Afecta : Char  read FAfecta write FAfecta;
-    [BelongsTo('MDL0_ID', True)] [Lazy]
-    property Modulo: TModulo read FModulo write FModulo;
-	  [HasMany('TNR0_ID', True)] [Lazy]
-    property TrnEmp: TTrnEmps read FTrnEmps write FTrnEmps;
-    [BelongsTo('EST0_ID', True)] [Lazy]
-    property Estado: TEstado read FEstado write FEstado;
-  end;
+    procedure setFAfecta (const Value : TFAfecta);
+    procedure setLineas (const Value : Integer);
 
+    function  getFAfecta : TFAfecta;
+    function  getLineas : Integer;
+//    [Column('MDL0_ID')]
+//    property Mdl0_ID: Integer read FMdl0_Id write FMdl0_Id;
+  public
+  {$IFDEF Marshmallow}
+     [Column('FAFECTA', [cpRequired, cpNotNull], -1, -1, -1, 'Forma Afecta')]
+  {$ELSE}
+   {$IFDEF DORM}
+    [Column('FAFECTA')]
+   {$ENDIF}
+  {$ENDIF}
+    property FAfecta : TFAfecta read getFAfecta write setFAfecta;
+  {$IFDEF Marshmallow}
+     [Column('LINEAS', [cpRequired, cpNotNull], -1, -1, -1, 'Número de Lineas')]
+  {$ELSE}
+   {$IFDEF DORM}
+    [Column('LINEAS')]
+   {$ENDIF}
+  {$ENDIF}
+    property Lineas : Integer read getLineas write setLineas;
+
+//    [BelongsTo('MDL0_ID', True)] [Lazy]
+//    property Modulo: TModulo read FModulo write FModulo;
+//	  [HasMany('TNR0_ID', True)] [Lazy]
+//    property TrnEmp: TTrnEmps read FTrnEmps write FTrnEmps;
+//    [BelongsTo('EST0_ID', True)] [Lazy]
+//    property Estado: TEstado read FEstado write FEstado;
+  end;
+{
   [Entity('TRN_TRN1_TRNEMP')]
   TTrnEmp = class (TAxonModel)
   private
@@ -83,9 +116,31 @@ type
     [Column('SIGUIENTE')]
     property Siguiente:Integer read FSiguiente write FSiguiente;
   end;
-
+}
 
 implementation
 
+
+{ TAxnMTrn }
+
+function TAxnMTrn.getFAfecta: TFAfecta;
+begin
+  Result := FFAfecta;
+end;
+
+function TAxnMTrn.getLineas: Integer;
+begin
+  Result := FLineas;
+end;
+
+procedure TAxnMTrn.setFAfecta(const Value: TFAfecta);
+begin
+  FFAfecta := Value;
+end;
+
+procedure TAxnMTrn.setLineas(const Value: Integer);
+begin
+  FLineas := Value;
+end;
 
 end.

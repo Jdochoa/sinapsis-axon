@@ -7,9 +7,18 @@
             <Dependencies/>
         </Projects>
         <Projects Include="sinapsis.axn.vm.ctl.dproj">
-            <Dependencies/>
+            <Dependencies>sinapsis.axn.vm.dproj</Dependencies>
+        </Projects>
+        <Projects Include="sinapsis.axn.vm.clt.dproj">
+            <Dependencies>sinapsis.axn.vm.dproj;sinapsis.axn.vm.ctl.dproj</Dependencies>
+        </Projects>
+        <Projects Include="sinapsis.axn.vm.prv.dproj">
+            <Dependencies>sinapsis.axn.vm.ctl.dproj</Dependencies>
         </Projects>
         <Projects Include="..\sinapsis.axn.ViewModel.Test.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Pruebas.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -29,14 +38,32 @@
     <Target Name="sinapsis_axn_vm:Make">
         <MSBuild Projects="sinapsis.axn.vm.dproj" Targets="Make"/>
     </Target>
-    <Target Name="sinapsis_axn_vm_ctl">
+    <Target Name="sinapsis_axn_vm_ctl" DependsOnTargets="sinapsis.axn.vm">
         <MSBuild Projects="sinapsis.axn.vm.ctl.dproj"/>
     </Target>
-    <Target Name="sinapsis_axn_vm_ctl:Clean">
+    <Target Name="sinapsis_axn_vm_ctl:Clean" DependsOnTargets="sinapsis.axn.vm:Clean">
         <MSBuild Projects="sinapsis.axn.vm.ctl.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="sinapsis_axn_vm_ctl:Make">
+    <Target Name="sinapsis_axn_vm_ctl:Make" DependsOnTargets="sinapsis.axn.vm:Make">
         <MSBuild Projects="sinapsis.axn.vm.ctl.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm_clt" DependsOnTargets="sinapsis.axn.vm;sinapsis.axn.vm.ctl">
+        <MSBuild Projects="sinapsis.axn.vm.clt.dproj"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm_clt:Clean" DependsOnTargets="sinapsis.axn.vm:Clean;sinapsis.axn.vm.ctl:Clean">
+        <MSBuild Projects="sinapsis.axn.vm.clt.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm_clt:Make" DependsOnTargets="sinapsis.axn.vm:Make;sinapsis.axn.vm.ctl:Make">
+        <MSBuild Projects="sinapsis.axn.vm.clt.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm_prv" DependsOnTargets="sinapsis.axn.vm.ctl">
+        <MSBuild Projects="sinapsis.axn.vm.prv.dproj"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm_prv:Clean" DependsOnTargets="sinapsis.axn.vm.ctl:Clean">
+        <MSBuild Projects="sinapsis.axn.vm.prv.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm_prv:Make" DependsOnTargets="sinapsis.axn.vm.ctl:Make">
+        <MSBuild Projects="sinapsis.axn.vm.prv.dproj" Targets="Make"/>
     </Target>
     <Target Name="sinapsis_axn_ViewModel_Test">
         <MSBuild Projects="..\sinapsis.axn.ViewModel.Test.dproj"/>
@@ -47,14 +74,23 @@
     <Target Name="sinapsis_axn_ViewModel_Test:Make">
         <MSBuild Projects="..\sinapsis.axn.ViewModel.Test.dproj" Targets="Make"/>
     </Target>
+    <Target Name="Pruebas">
+        <MSBuild Projects="Pruebas.dproj"/>
+    </Target>
+    <Target Name="Pruebas:Clean">
+        <MSBuild Projects="Pruebas.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Pruebas:Make">
+        <MSBuild Projects="Pruebas.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="sinapsis_axn_vm;sinapsis_axn_vm_ctl;sinapsis_axn_ViewModel_Test"/>
+        <CallTarget Targets="sinapsis_axn_vm;sinapsis_axn_vm_ctl;sinapsis_axn_vm_clt;sinapsis_axn_vm_prv;sinapsis_axn_ViewModel_Test;Pruebas"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="sinapsis_axn_vm:Clean;sinapsis_axn_vm_ctl:Clean;sinapsis_axn_ViewModel_Test:Clean"/>
+        <CallTarget Targets="sinapsis_axn_vm:Clean;sinapsis_axn_vm_ctl:Clean;sinapsis_axn_vm_clt:Clean;sinapsis_axn_vm_prv:Clean;sinapsis_axn_ViewModel_Test:Clean;Pruebas:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="sinapsis_axn_vm:Make;sinapsis_axn_vm_ctl:Make;sinapsis_axn_ViewModel_Test:Make"/>
+        <CallTarget Targets="sinapsis_axn_vm:Make;sinapsis_axn_vm_ctl:Make;sinapsis_axn_vm_clt:Make;sinapsis_axn_vm_prv:Make;sinapsis_axn_ViewModel_Test:Make;Pruebas:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

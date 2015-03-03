@@ -25,17 +25,14 @@ package sinapsis.axn.m.ctl.arc;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Axon de Sinapsis: Modelo del catalogo de archivos'}
 {$LIBSUFFIX '200'}
 {$IMPLICITBUILD ON}
 
 requires
   rtl,
   dbrtl,
-  dorm_runtime,
-  sinapsis.axn.common,
-  sinapsis.axn.m,
-  sinapsis.axn.m.ctl,
-  Spring.Base;
+  sinapsis.axn.m.ctl;
 
 contains
   sinapsis.axn.m.arc.interfaz in '..\..\arc\sinapsis.axn.m.arc.interfaz.pas',
