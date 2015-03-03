@@ -7,18 +7,27 @@
             <Dependencies/>
         </Projects>
         <Projects Include="sinapsis.axn.m.ctl.dproj">
+            <Dependencies>sinapsis.axn.m.dproj</Dependencies>
+        </Projects>
+        <Projects Include="sinapsis.axn.m.ctl.trn.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="sinapsis.axn.m.ctl.arc.dproj">
+        <Projects Include="sinapsis.axn.m.clt.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="sinapsis.axn.m.prv.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="sinapsis.axn.model.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="sinapsis.axn.model.Test.dproj">
+        <Projects Include="..\sinapsis.axn.model.Test.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\..\..\Common\sinapsis.axn.common.dproj">
+        <Projects Include="Pruebas.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Test.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -38,23 +47,41 @@
     <Target Name="sinapsis_axn_m:Make">
         <MSBuild Projects="sinapsis.axn.m.dproj" Targets="Make"/>
     </Target>
-    <Target Name="sinapsis_axn_m_ctl">
+    <Target Name="sinapsis_axn_m_ctl" DependsOnTargets="sinapsis.axn.m">
         <MSBuild Projects="sinapsis.axn.m.ctl.dproj"/>
     </Target>
-    <Target Name="sinapsis_axn_m_ctl:Clean">
+    <Target Name="sinapsis_axn_m_ctl:Clean" DependsOnTargets="sinapsis.axn.m:Clean">
         <MSBuild Projects="sinapsis.axn.m.ctl.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="sinapsis_axn_m_ctl:Make">
+    <Target Name="sinapsis_axn_m_ctl:Make" DependsOnTargets="sinapsis.axn.m:Make">
         <MSBuild Projects="sinapsis.axn.m.ctl.dproj" Targets="Make"/>
     </Target>
-    <Target Name="sinapsis_axn_m_ctl_arc">
-        <MSBuild Projects="sinapsis.axn.m.ctl.arc.dproj"/>
+    <Target Name="sinapsis_axn_m_ctl_trn">
+        <MSBuild Projects="sinapsis.axn.m.ctl.trn.dproj"/>
     </Target>
-    <Target Name="sinapsis_axn_m_ctl_arc:Clean">
-        <MSBuild Projects="sinapsis.axn.m.ctl.arc.dproj" Targets="Clean"/>
+    <Target Name="sinapsis_axn_m_ctl_trn:Clean">
+        <MSBuild Projects="sinapsis.axn.m.ctl.trn.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="sinapsis_axn_m_ctl_arc:Make">
-        <MSBuild Projects="sinapsis.axn.m.ctl.arc.dproj" Targets="Make"/>
+    <Target Name="sinapsis_axn_m_ctl_trn:Make">
+        <MSBuild Projects="sinapsis.axn.m.ctl.trn.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="sinapsis_axn_m_clt">
+        <MSBuild Projects="sinapsis.axn.m.clt.dproj"/>
+    </Target>
+    <Target Name="sinapsis_axn_m_clt:Clean">
+        <MSBuild Projects="sinapsis.axn.m.clt.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sinapsis_axn_m_clt:Make">
+        <MSBuild Projects="sinapsis.axn.m.clt.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="sinapsis_axn_m_prv">
+        <MSBuild Projects="sinapsis.axn.m.prv.dproj"/>
+    </Target>
+    <Target Name="sinapsis_axn_m_prv:Clean">
+        <MSBuild Projects="sinapsis.axn.m.prv.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sinapsis_axn_m_prv:Make">
+        <MSBuild Projects="sinapsis.axn.m.prv.dproj" Targets="Make"/>
     </Target>
     <Target Name="sinapsis_axn_model">
         <MSBuild Projects="sinapsis.axn.model.dproj"/>
@@ -66,31 +93,40 @@
         <MSBuild Projects="sinapsis.axn.model.dproj" Targets="Make"/>
     </Target>
     <Target Name="sinapsis_axn_model_Test">
-        <MSBuild Projects="sinapsis.axn.model.Test.dproj"/>
+        <MSBuild Projects="..\sinapsis.axn.model.Test.dproj"/>
     </Target>
     <Target Name="sinapsis_axn_model_Test:Clean">
-        <MSBuild Projects="sinapsis.axn.model.Test.dproj" Targets="Clean"/>
+        <MSBuild Projects="..\sinapsis.axn.model.Test.dproj" Targets="Clean"/>
     </Target>
     <Target Name="sinapsis_axn_model_Test:Make">
-        <MSBuild Projects="sinapsis.axn.model.Test.dproj" Targets="Make"/>
+        <MSBuild Projects="..\sinapsis.axn.model.Test.dproj" Targets="Make"/>
     </Target>
-    <Target Name="sinapsis_axn_common">
-        <MSBuild Projects="..\..\..\Common\sinapsis.axn.common.dproj"/>
+    <Target Name="Pruebas">
+        <MSBuild Projects="Pruebas.dproj"/>
     </Target>
-    <Target Name="sinapsis_axn_common:Clean">
-        <MSBuild Projects="..\..\..\Common\sinapsis.axn.common.dproj" Targets="Clean"/>
+    <Target Name="Pruebas:Clean">
+        <MSBuild Projects="Pruebas.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="sinapsis_axn_common:Make">
-        <MSBuild Projects="..\..\..\Common\sinapsis.axn.common.dproj" Targets="Make"/>
+    <Target Name="Pruebas:Make">
+        <MSBuild Projects="Pruebas.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Test">
+        <MSBuild Projects="Test.dproj"/>
+    </Target>
+    <Target Name="Test:Clean">
+        <MSBuild Projects="Test.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Test:Make">
+        <MSBuild Projects="Test.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="sinapsis_axn_m;sinapsis_axn_m_ctl;sinapsis_axn_m_ctl_arc;sinapsis_axn_model;sinapsis_axn_model_Test;sinapsis_axn_common"/>
+        <CallTarget Targets="sinapsis_axn_m;sinapsis_axn_m_ctl;sinapsis_axn_m_ctl_trn;sinapsis_axn_m_clt;sinapsis_axn_m_prv;sinapsis_axn_model;sinapsis_axn_model_Test;Pruebas;Test"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="sinapsis_axn_m:Clean;sinapsis_axn_m_ctl:Clean;sinapsis_axn_m_ctl_arc:Clean;sinapsis_axn_model:Clean;sinapsis_axn_model_Test:Clean;sinapsis_axn_common:Clean"/>
+        <CallTarget Targets="sinapsis_axn_m:Clean;sinapsis_axn_m_ctl:Clean;sinapsis_axn_m_ctl_trn:Clean;sinapsis_axn_m_clt:Clean;sinapsis_axn_m_prv:Clean;sinapsis_axn_model:Clean;sinapsis_axn_model_Test:Clean;Pruebas:Clean;Test:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="sinapsis_axn_m:Make;sinapsis_axn_m_ctl:Make;sinapsis_axn_m_ctl_arc:Make;sinapsis_axn_model:Make;sinapsis_axn_model_Test:Make;sinapsis_axn_common:Make"/>
+        <CallTarget Targets="sinapsis_axn_m:Make;sinapsis_axn_m_ctl:Make;sinapsis_axn_m_ctl_trn:Make;sinapsis_axn_m_clt:Make;sinapsis_axn_m_prv:Make;sinapsis_axn_model:Make;sinapsis_axn_model_Test:Make;Pruebas:Make;Test:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

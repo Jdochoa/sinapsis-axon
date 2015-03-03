@@ -1,14 +1,27 @@
 unit sinapsis.axn.m.clt.cliente;
 
 interface
+{$I Model.inc}
 uses
-  dorm.Mappings,
+  {$IFDEF Marshmallow}
+    Spring.Persistence.Mapping.Attributes,
+  {$ELSE}
+   {$IFDEF DORM}
+    dorm.Mappings,
+   {$ENDIF}
+  {$ENDIF}
   sinapsis.axn.m.catalogo,
-
   sinapsis.axn.m.clt.interfaz;
 type
-  [Entity('CLT_CLI0_CLIENTE')]
-  [NoAutomapping]
+  {$IFDEF Marshmallow}
+    [Entity]
+    [Table('CLT_CLI0_CLIENTE','')]
+  {$ELSE}
+   {$IFDEF DORM}
+    [Entity('CLT_CLI0_CLIENTE')]
+    [NoAutomapping]
+   {$ENDIF}
+  {$ENDIF}
   TAxnMCli0 = class(TAxnMCtl,IAxnMCli0)
   private
     FNIT :string;
@@ -32,24 +45,64 @@ type
     function GetSexo :string;
     function GetIdentificacion :string;
     function getDescripcion: string; override;
-
-
   public
+  {$IFDEF Marshmallow}
+     [Column('NIT', [cpRequired, cpNotNull], -1, -1, -1, 'N.I.T.')]
+  {$ELSE}
+   {$IFDEF DORM}
     [Column('NIT')]
+   {$ENDIF}
+  {$ENDIF}
     property NIT: String read GetNIT write SetNIT;
+  {$IFDEF Marshmallow}
+     [Column('DIRECCION', [], -1, -1, -1, 'Dirección')]
+  {$ELSE}
+   {$IFDEF DORM}
     [Column('DIRECCION')]
+   {$ENDIF}
+  {$ENDIF}
     property Direccion : string read GetDireccion write SetDireccion;
+  {$IFDEF Marshmallow}
+     [Column('NOMBRE', [], -1, -1, -1, 'Nombres')]
+  {$ELSE}
+   {$IFDEF DORM}
     [Column('NOMBRE')]
+   {$ENDIF}
+  {$ENDIF}
     property Nombre:String read GetNombre write SetNombre;
+  {$IFDEF Marshmallow}
+     [Column('APELLIDO', [], -1, -1, -1, 'Apellidos')]
+  {$ELSE}
+   {$IFDEF DORM}
     [Column('APELLIDO')]
+   {$ENDIF}
+  {$ENDIF}
     property Apellido:string read GetApellido write SetApellido;
+  {$IFDEF Marshmallow}
+     [Column('SEXO', [cpRequired, cpNotNull], -1, -1, -1, 'Sexo')]
+  {$ELSE}
+   {$IFDEF DORM}
     [Column('SEXO')]
+   {$ENDIF}
+  {$ENDIF}
     property Sexo:String read GetSexo write SetSexo;
-    [Column('IDENTIFICACION')]
+  {$IFDEF Marshmallow}
+     [Column('IDENTIFICACION', [], -1, -1, -1, 'Identificación')]
+  {$ELSE}
+   {$IFDEF DORM}
+    [Column('IDENTIFICACION)]
+   {$ENDIF}
+  {$ENDIF}
     property Identificacion: string read GetIdentificacion write SetIdentificacion;
+//  {$IFDEF Marshmallow}
+//     [Column('DESCRIPCION', [cpDontInsert, cpDontUpdate], -1, -1, -1, 'Nombres y Apellidos')]
+//  {$ELSE}
+//   {$IFDEF DORM}
 //    [Transient]
 //    [Column('DESCRIPCION')]
-    property Descripcion: String read GetDescripcion;
+//   {$ENDIF}
+//  {$ENDIF}
+//    property Descripcion: String read GetDescripcion;
   end;
 
 //  TAxnMListCli0 = class (TAxnMListCTL, IAxnMListCli0)
@@ -60,8 +113,8 @@ implementation
 
 { TAxnMClt }
 uses
-  System.Rtti,
-  dorm.Utils
+  System.Rtti
+//  dorm.Utils
   ;
 
 function TAxnMCli0.GetApellido: string;

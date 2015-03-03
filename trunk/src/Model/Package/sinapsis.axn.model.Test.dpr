@@ -7,32 +7,36 @@ program sinapsis.axn.model.Test;
 uses
   System.SysUtils,
   Spring.Collections,
-  sinapsis.axn.model.interfaz in '..\sinapsis.axn.model.interfaz.pas',
-  sinapsis.axn.model.base in '..\sinapsis.axn.model.base.pas',
-  sinapsis.axn.modelDORM in '..\sinapsis.axn.modelDORM.pas',
-  sinapsis.axn.m.mdl in '..\mdl\sinapsis.axn.m.mdl.pas',
-  sinapsis.axn.m.catalogo in '..\axn\sinapsis.axn.m.catalogo.pas',
-  sinapsis.axn.m.interfaz in '..\axn\sinapsis.axn.m.interfaz.pas',
-  sinapsis.axn.m in '..\axn\sinapsis.axn.m.pas',
-  sinapsis.axn.common.clases in '..\..\Common\sinapsis.axn.common.clases.pas';
+  Spring.Collections.Lists,
+  sinapsis.axn.model.interfaz,
+  sinapsis.axn.model,
+  sinapsis.axn.model.DORM,
+  sinapsis.axn.m,
+  sinapsis.axn.m.arc.interfaz,
+  sinapsis.axn.m.arc
+  ;
 
-Procedure Test1;
-var
-  Modelo:IAxnModel;
-  Mod0 : TModulo;
-  Mod0L : IList<TModulo>;
+Procedure Test1(Modelo:IInterface);
+//Procedure Test1(Modelo:IAxnModel);
+//var
+//  Arc0 : TArchivo;
+//  Arc0L : IList<TArchivo>;
 Begin
-  Modelo := TAxnModels.CreateAxnModel(deDevelopment,'C:\Sinapsis\axn\cnf\axn.sqlite3.conf');
-  Mod0L := TCollections.CreateObjectList<TModulo>(True);
-  Modelo.LoadList(TModulo,TObject(Mod0L));
-  for Mod0 in Mod0L do
-    WriteLn(Mod0.Nombre);
+//  Arc0L := TCollections.CreateObjectList<TArchivo>(True);
+//  Modelo.LoadList(TArchivo ,TObject(Arc0L));
+//
+//  for Arc0 in Arc0L.Where (function (const Archivo:TArchivo):Boolean
+//                           begin
+//                                Result := Archivo.Ejecutable = 'F';
+//                           end) do
+//    WriteLn(Arc0.Codigo+'-'+Arc0.Nombre+'--'+Arc0.Descripcion);
   readln;
 End;
 
+
 begin
   try
-    Test1;
+    { TODO -oUser -cConsole Main : Insert code here }
   except
     on E: Exception do
       Writeln(E.ClassName, ': ', E.Message);
