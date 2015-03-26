@@ -1,4 +1,4 @@
-package sinapsis.axn.model;
+package sinapsis.axn.common;
 
 {$R *.res}
 {$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
@@ -25,22 +25,15 @@ package sinapsis.axn.model;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'Axon de Sinapsis: Modelo'}
 {$LIBSUFFIX '200'}
-{$RUNONLY}
 {$IMPLICITBUILD ON}
 
 requires
   rtl,
-  dbrtl,
-  vcl,
-  vclimg,
-  UIBD20Win32R,
-  DbxCommonDriver;
+  Spring.Base;
 
 contains
-  sinapsis.axn.model.interfaz in '..\..\sinapsis.axn.model.interfaz.pas',
-  sinapsis.axn.model in '..\..\sinapsis.axn.model.pas',
-  sinapsis.axn.model.SORM in '..\..\sinapsis.axn.model.SORM.pas';
+  sinapsis.axn.common.clases in 'sinapsis.axn.common.clases.pas',
+  sinapsis.axn.common.configuracion in 'sinapsis.axn.common.configuracion.pas';
 
 end.

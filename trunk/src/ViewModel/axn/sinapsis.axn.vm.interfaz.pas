@@ -51,7 +51,7 @@ type
 //  IAxnVMSubModulo = Interface(IAxnVM)
     ['{8DCD035D-7AE4-443F-96D3-8F96DD559F9A}']
     function Id(const Value : Integer):IAxnVMSingle;
-    function All(const Value: Integer):IAxnVMCollection<TAxnM>;
+    function All:IAxnVMCollection<TAxnM>;
   End;
 
   IAxnPkg = Interface(IAxnVM)

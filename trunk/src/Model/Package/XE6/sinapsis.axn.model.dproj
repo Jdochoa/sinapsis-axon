@@ -139,6 +139,7 @@
         <DCCReference Include="vcl.dcp"/>
         <DCCReference Include="vclimg.dcp"/>
         <DCCReference Include="UIBD20Win32R.dcp"/>
+        <DCCReference Include="DbxCommonDriver.dcp"/>
         <DCCReference Include="..\..\sinapsis.axn.model.interfaz.pas"/>
         <DCCReference Include="..\..\sinapsis.axn.model.pas"/>
         <DCCReference Include="..\..\sinapsis.axn.model.SORM.pas"/>

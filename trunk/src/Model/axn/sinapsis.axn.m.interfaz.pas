@@ -25,6 +25,7 @@ type
     property CreatedAt:TDateTime read getCreatedAt write setCreatedAt ;
     property ModifiedBy:Integer read getModifiedBy write setModifiedBy;
     property ModifiedAt:TDateTime read getModifiedAt write setModifiedAt;
+    function InterfaceClone:IAxnM;
   end;
 
 //  IAxnMList<I : IAxnM> = interface

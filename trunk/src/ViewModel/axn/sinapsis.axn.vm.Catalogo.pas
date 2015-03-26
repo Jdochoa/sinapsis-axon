@@ -44,10 +44,12 @@ type
   TAxnSrvCtl = class (TAxnSrvMdl,IAxnSrvCtl)
   private
   protected
-    function InternalCodigo<T: TAxnMCtl, constructor>(const Value:String):T;
+    function InternalCodigo<T: TAxnMCtl, constructor; T2: TAxnVMCtl, constructor>(const Value:string):T2;
   public
     function Id(const Value : Integer):IAxnVMCtl;//<IAxnMCtl>;
     function Codigo(const Value:String):IAxnVMCtl;//<IAxnMCtl>;
+
+    function All:IAxnVMCollection<TAxnMCtl>;
   end;
 
 implementation
@@ -58,7 +60,7 @@ uses
 
 constructor TAxnVMCtl{<T>}.Create(Value: TAxnMCtl);
 begin
-  AxnMCTL := TAxnMCTL(Value);
+  AxnMCTL := Value;
 end;
 
 function TAxnVMCtl{<T>}.GetAxnMCTL: TAxnMCtl;
@@ -88,7 +90,7 @@ end;
 
 procedure TAxnVMCtl{<T>}.SetAxnMCTL(const Value: TAxnMCtl);
 begin
-  TAxnMCtl(FAxnM) := Value;
+  TAxnMCtl(FAxnM) := TAxnMCtl(Value.ObjectClone);
 end;
 
 procedure TAxnVMCtl{<T>}.SetCodigo(const Value: String);
@@ -103,24 +105,28 @@ end;
 
 { TAxnSrvCtl }
 
+function TAxnSrvCtl.All: IAxnVMCollection<TAxnMCtl>;
+begin
+  Result := InternalAll<TAxnMCtl,TAxnVMCtl>;
+end;
+
 function TAxnSrvCtl.Codigo(const Value: String): IAxnVMCtl;//<IAxnMCtl>;
 begin
-  Result := TAxnVMCtl.Create(InternalCodigo<TAxnMCtl>(Value));
+  Result := InternalCodigo<TAxnMCtl, TAxnVMCtl>(Value);
 end;
 
 function TAxnSrvCtl.Id(const Value: Integer): IAxnVMCtl;//<IAxnMCtl>;
 begin
-  Result := TAxnVMCtl.Create(InternalId<TAxnMCtl>(Value));
+  Result := InternalId<TAxnMCtl, TAxnVMCtl>(Value);
+//  Result := TAxnVMCtl.Create(InternalId<TAxnMCtl>(Value));
 end;
 
 
-function TAxnSrvCtl.InternalCodigo<T>(const Value: String): T;
-Var
-  D : IList<T>;
+function TAxnSrvCtl.InternalCodigo<T, T2>(const Value: String): T2;
 begin
-  D := Model.Load<T>(Value);
-  Result :=  Model.Load<T>(Value).FirstOrDefault;
+  Result := Retorno<T,T2>(Model.Load<T>(Value).FirstOrDefault);
 end;
+
 
 end.
 

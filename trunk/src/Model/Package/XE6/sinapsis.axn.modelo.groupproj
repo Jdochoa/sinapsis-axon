@@ -10,13 +10,13 @@
             <Dependencies>sinapsis.axn.m.dproj</Dependencies>
         </Projects>
         <Projects Include="sinapsis.axn.m.ctl.trn.dproj">
-            <Dependencies/>
+            <Dependencies>sinapsis.axn.m.ctl.dproj</Dependencies>
         </Projects>
         <Projects Include="sinapsis.axn.m.clt.dproj">
-            <Dependencies/>
+            <Dependencies>sinapsis.axn.m.ctl.dproj</Dependencies>
         </Projects>
         <Projects Include="sinapsis.axn.m.prv.dproj">
-            <Dependencies/>
+            <Dependencies>sinapsis.axn.m.ctl.dproj</Dependencies>
         </Projects>
         <Projects Include="sinapsis.axn.model.dproj">
             <Dependencies/>
@@ -56,31 +56,31 @@
     <Target Name="sinapsis_axn_m_ctl:Make" DependsOnTargets="sinapsis.axn.m:Make">
         <MSBuild Projects="sinapsis.axn.m.ctl.dproj" Targets="Make"/>
     </Target>
-    <Target Name="sinapsis_axn_m_ctl_trn">
+    <Target Name="sinapsis_axn_m_ctl_trn" DependsOnTargets="sinapsis.axn.m.ctl">
         <MSBuild Projects="sinapsis.axn.m.ctl.trn.dproj"/>
     </Target>
-    <Target Name="sinapsis_axn_m_ctl_trn:Clean">
+    <Target Name="sinapsis_axn_m_ctl_trn:Clean" DependsOnTargets="sinapsis.axn.m.ctl:Clean">
         <MSBuild Projects="sinapsis.axn.m.ctl.trn.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="sinapsis_axn_m_ctl_trn:Make">
+    <Target Name="sinapsis_axn_m_ctl_trn:Make" DependsOnTargets="sinapsis.axn.m.ctl:Make">
         <MSBuild Projects="sinapsis.axn.m.ctl.trn.dproj" Targets="Make"/>
     </Target>
-    <Target Name="sinapsis_axn_m_clt">
+    <Target Name="sinapsis_axn_m_clt" DependsOnTargets="sinapsis.axn.m.ctl">
         <MSBuild Projects="sinapsis.axn.m.clt.dproj"/>
     </Target>
-    <Target Name="sinapsis_axn_m_clt:Clean">
+    <Target Name="sinapsis_axn_m_clt:Clean" DependsOnTargets="sinapsis.axn.m.ctl:Clean">
         <MSBuild Projects="sinapsis.axn.m.clt.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="sinapsis_axn_m_clt:Make">
+    <Target Name="sinapsis_axn_m_clt:Make" DependsOnTargets="sinapsis.axn.m.ctl:Make">
         <MSBuild Projects="sinapsis.axn.m.clt.dproj" Targets="Make"/>
     </Target>
-    <Target Name="sinapsis_axn_m_prv">
+    <Target Name="sinapsis_axn_m_prv" DependsOnTargets="sinapsis.axn.m.ctl">
         <MSBuild Projects="sinapsis.axn.m.prv.dproj"/>
     </Target>
-    <Target Name="sinapsis_axn_m_prv:Clean">
+    <Target Name="sinapsis_axn_m_prv:Clean" DependsOnTargets="sinapsis.axn.m.ctl:Clean">
         <MSBuild Projects="sinapsis.axn.m.prv.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="sinapsis_axn_m_prv:Make">
+    <Target Name="sinapsis_axn_m_prv:Make" DependsOnTargets="sinapsis.axn.m.ctl:Make">
         <MSBuild Projects="sinapsis.axn.m.prv.dproj" Targets="Make"/>
     </Target>
     <Target Name="sinapsis_axn_model">

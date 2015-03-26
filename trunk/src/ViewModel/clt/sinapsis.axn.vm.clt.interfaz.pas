@@ -37,6 +37,8 @@ type
     function Id(const Value : Integer):IAxnVMCli0;
     function Codigo(const Value:String):IAxnVMCli0;
     function NIT(const Value:String):IAxnVMCli0;
+    function All:IAxnVMCollection<TAxnMCli0>;
+
   End;
 
 
