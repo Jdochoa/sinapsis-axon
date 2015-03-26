@@ -35,6 +35,7 @@ type
     ['{8DCD035D-7AE4-443F-96D3-8F96DD559F9A}']
     function Id(const Value : Integer):IAxnVMCtl;
     function Codigo(const Value:String):IAxnVMCtl;
+    function All:IAxnVMCollection<TAxnMCtl>;
   End;
 
 

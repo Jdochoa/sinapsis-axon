@@ -42,6 +42,8 @@ type
     procedure setModifiedAt(Value :TDateTime);
 
   public
+    function ObjectClone:TObject;
+    function InterfaceClone: IAxnM;
   {$IFDEF Marshmallow}
      [Id]
      [Column('ID', [cpRequired, cpPrimaryKey, cpNotNull], -1, -1, -1, 'Primary Key')]
@@ -88,6 +90,9 @@ type
     {$ENDIF}
   {$ENDIF}
    property ModifiedAt:TDateTime read getModifiedAt;
+
+
+
   end;
 
 //  TAxnMList<T:TAxnM> = class(TObjectList<T>, IAxnMList<T>)
@@ -99,7 +104,41 @@ type
 
 implementation
 
+uses
+  System.JSON,
+  System.JSONConsts,
+  Data.DBXJSONReflect;
+
+
 { TAxonModel }
+
+function TAxnM.ObjectClone: TObject;
+var
+  MarshalObj: TJSONMarshal;
+  UnMarshalObj: TJSONUnMarshal;
+  JSONValue: TJSONValue;
+begin
+  Result:= nil;
+  MarshalObj := TJSONMarshal.Create;
+  UnMarshalObj := TJSONUnMarshal.Create;
+  try
+    JSONValue := MarshalObj.Marshal(Self);
+    try
+      if Assigned(JSONValue) then
+        Result:= UnMarshalObj.Unmarshal(JSONValue);
+    finally
+      JSONValue.Free;
+    end;
+  finally
+    MarshalObj.Free;
+    UnMarshalObj.Free;
+  end;
+end;
+
+function TAxnM.InterfaceClone: IAxnM;
+begin
+  Result := nil;
+end;
 
 function TAxnM.getCreatedAt: TDateTime;
 begin

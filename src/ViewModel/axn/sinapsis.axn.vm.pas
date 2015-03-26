@@ -64,10 +64,12 @@ type
   TAxnSrvMdl = class(TAxnMV, IAxnSrvMdl)
   private
   protected
-    function InternalId<T: class, constructor>(const Value:Integer):T; //virtual;
+    function Retorno<T: TAxnM, constructor; T2: TAxnVMSingle, constructor>(const Value:T):T2;
+    function InternalId <T: TAxnM, constructor; T2: TAxnVMSingle, constructor>(const Value:Integer):T2;
+    function InternalAll<T: TAxnM, constructor; T2: TAxnVMSingle, constructor>:IAxnVMCollection<T>;
   public
     function Id(const Value : Integer):IAxnVMSingle; overload;//<IAxnM>; virtual;
-    function All(const Value: Integer):IAxnVMCollection<TAxnM>;
+    function All:IAxnVMCollection<TAxnM>;
   End;
 
   TAxnPkg = class (TAxnMV, IAxnPkg)
@@ -81,7 +83,6 @@ type
     destructor Done;
     property SrvMdl[Index:String]:IAxnSrvMdl read GetSrvMdl;// write SetSrvMdl;
   End;
-
 
 
 
@@ -99,6 +100,9 @@ begin
   FAxnModel := Value;
 end;
 
+
+
+
 function TAxnMV.GetModel: TAxnModel;
 begin
   Result := FAxnModel;
@@ -114,7 +118,7 @@ end;
 constructor TAxnVMCollection<T>.Create;
 begin
   if not Assigned(FLista) then
-    FLista := TCollections.CreateList<T>;
+    FLista := TCollections.CreateObjectList<T>;
 end;
 
 function TAxnVMCollection<T>.GetClase: TClass;
@@ -167,7 +171,7 @@ end;
 
 procedure TAxnVMSingle{<T>}.SetAxnM(const Value: TAxnM);
 begin
-  FAxnM := Value;
+  FAxnM := TAxnM(Value.ObjectClone)
 end;
 
 procedure TAxnVMSingle{<T>}.SetId(const Value: Integer);
@@ -177,32 +181,39 @@ end;
 
 { TAxnSrvMdl }
 
-function TAxnSrvMdl.All(const Value: Integer): IAxnVMCollection<TAxnM>;
+function TAxnSrvMdl.All: IAxnVMCollection<TAxnM>;
 begin
+  Result := InternalAll<TAxnM,TAxnVMSingle>;
 end;
 
 
 function TAxnSrvMdl.Id(const Value: Integer): IAxnVMSingle;//<IAxnM>;
 begin
-  Result := TAxnVMSingle{<IAxnM>}.Create(InternalId<TAxnM>(Value));
+  Result := InternalId<TAxnM,TAxnVMSingle >(Value);
+//  Result := TAxnVMSingle{<IAxnM>}.Create(InternalId<TAxnM,TAxnVMSingle >(Value));
 end;
 
-function TAxnSrvMdl.InternalId<T>(const Value: Integer): T;
-var
-  str:String;
-  cls:IList<T>;
-  Cl : T;
-
+function TAxnSrvMdl.InternalAll<T, T2>: IAxnVMCollection<T>;
 begin
-  cls := TCollections.CreateList<T>;
-  cls :=Model.Load<T>(Value);
-  cl := cls.FirstOrDefault;
-
-  Result := cl;
-  cls.Clear;
-//  Result :=  Model.Load<T>(Value).FirstOrDefault;
+  Result := TAxnVMCollection<T>.Create;
+  Result.Lista :=  Model.LoadList<T>;
 end;
 
+function TAxnSrvMdl.InternalId<T, T2>(const Value: Integer): T2;
+begin
+  Result := Retorno<T,T2>(Model.Load<T>(Value).FirstOrDefault);
+end;
+
+function TAxnSrvMdl.Retorno<T, T2>(const Value: T): T2;
+begin
+  if assigned(Value) then
+  begin
+    Result := T2.Create;
+    Result.AxnM := T(Value.ObjectClone);
+  end
+  else
+    Result := nil;
+end;
 
 { TAxnPkg }
 

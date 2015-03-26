@@ -61,7 +61,7 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <DCC_UnitSearchPath>$(Axon)\Lib\DelphiXE6\$(Platform)\$(Config)\;C:\Sinapsis\axn\src\trunk\src\ViewModel\axn;C:\Sinapsis\axn\src\trunk\src\ViewModel\prv;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>$(Axon)\Lib\DelphiXE6\$(Platform)\$(Config)\;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <Manifest_File>None</Manifest_File>
         <VerInfo_Locale>4106</VerInfo_Locale>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
@@ -125,15 +125,6 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\axn\sinapsis.axn.vm.catalogo.interfaz.pas"/>
-        <DCCReference Include="..\axn\sinapsis.axn.vm.Catalogo.pas"/>
-        <DCCReference Include="..\axn\sinapsis.axn.vm.interfaz.pas"/>
-        <DCCReference Include="..\axn\sinapsis.axn.vm.pas"/>
-        <DCCReference Include="..\clt\sinapsis.axn.vm.clt.cliente.pas"/>
-        <DCCReference Include="..\clt\sinapsis.axn.vm.clt.interfaz.pas"/>
-        <DCCReference Include="..\..\Model\sinapsis.axn.model.interfaz.pas"/>
-        <DCCReference Include="..\..\Model\sinapsis.axn.model.pas"/>
-        <DCCReference Include="..\..\Model\sinapsis.axn.model.SORM.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

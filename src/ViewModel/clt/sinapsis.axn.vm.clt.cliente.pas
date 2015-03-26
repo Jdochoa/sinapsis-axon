@@ -7,6 +7,7 @@ uses
   sinapsis.axn.m.clt.cliente,
   sinapsis.axn.vm.clt.interfaz,
   sinapsis.axn.vm,
+  sinapsis.axn.vm.interfaz,
   sinapsis.axn.vm.catalogo.interfaz,
   sinapsis.axn.vm.catalogo;
 
@@ -27,6 +28,8 @@ type
     function GetDireccion:String;
     function GetAxnMCli0:TAxnMCli0;
   public
+    constructor Create(Value: TAxnMCli0);
+
     property NIT: String read GetNIT write SetNIT;
     property Nombres: String read GetNombres write SetNombres;
     property Apellidos: String read GetApellidos write SetApellidos;
@@ -37,12 +40,14 @@ type
   TAxnSrvClt = Class (TAxnSrvCtl, IAxnSrvClt)
   private
   protected
-    function InternalId_<T: class, constructor>(const Value:Integer; out V : T):T;
-    function InternalNIT<T: TAxnMCli0, constructor>(const Value:String):T;
+    function InternalNIT<T: TAxnMCli0, constructor; T2: TAxnVMCli0, constructor>(const Value:string):T2;
   public
     function Id(const Value : Integer):IAxnVMCli0; overload;
     function Codigo(const Value:String):IAxnVMCli0;
     function NIT(const Value:String):IAxnVMCli0;
+
+    function All:IAxnVMCollection<TAxnMCli0>;
+
   End;
 
   TAxnPkgClt = class (TAxnPkg, IAxnPkgClt)
@@ -66,6 +71,12 @@ uses
 
 
 { TAxnVMPrv }
+
+constructor TAxnVMCli0.Create(Value: TAxnMCli0);
+begin
+//  inherited;
+  AxnMCli0 := Value;
+end;
 
 function TAxnVMCli0.GetApellidos: String;
 begin
@@ -99,7 +110,7 @@ end;
 
 procedure TAxnVMCli0.SetAxnMCli0(Value: TAxnMCli0);
 begin
-  AxnM := Value;
+  AxnM := TAxnMCli0(Value.ObjectClone);
 end;
 
 procedure TAxnVMCli0.SetDireccion(Value: String);
@@ -119,58 +130,41 @@ end;
 
 { TAxnSrvPrv }
 
+function TAxnSrvClt.All: IAxnVMCollection<TAxnMCli0>;
+begin
+  Result := InternalAll<TAxnMCli0,TAxnVMCli0>;
+end;
+
 function TAxnSrvClt.Codigo(const Value: String): IAxnVMCli0;
 begin
-  Result := TAxnVMCli0.Create(InternalCodigo<TAxnMCli0>(Value));
+  Result := InternalCodigo<TAxnMCli0, TAxnVMCli0>(Value);
 end;
 
 function TAxnSrvClt.Id(const Value: Integer): IAxnVMCli0;
-Var
- C, V : TAxnMCli0;
- R : IAxnVMCli0;
 begin
-  V := TAxnMCli0.Create;
-  C := InternalId<TAxnMCli0>(Value);
-  C := TAxnMCli0(V);
-  c := Model.Load<TAxnMCli0>(Value).FirstOrDefault;
-
-  R := TAxnVMCli0.Create(C);
-  Result := R;
+  Result := InternalId<TAxnMCli0, TAxnVMCli0>(Value);
 end;
 
-function TAxnSrvClt.InternalId_<T>(const Value: Integer; out V: T): T;
-var
-  str:String;
-  cls:IList<T>;
-  Cl : T;
-begin
-  Str := Format('select * from %s where Id = %d',[TRttiExplorer.GetTable(T).TableName,Value]);
-  cls :=Model.Load<T>(Str,[]);
-  cl := cls.FirstOrDefault;
-  V :=Cl;
-//  Temp := Cl;
-  Result := cl;
-  cls.Clear;
-//  Result :=  Model.Load<T>(Value).FirstOrDefault;
 
-end;
-
-function TAxnSrvClt.InternalNIT<T>(const Value: String): T;
+function TAxnSrvClt.InternalNIT<T, T2>(const Value: string): T2;
 var
+  D : T;
   P : IList<TAxnParam>;
   R:TAxnParam;
 begin
-   P := TCollections.CreateList<TAxnParam>;
-   R.Nombre:= 'NIT';
-   R.Valor := Value;
-   R.Operador := opAnd;
-   P.Add(R);
-   Result :=  Model.Load<T>(P).FirstOrDefault;
+  Result := nil;
+  P := TCollections.CreateList<TAxnParam>;
+  R.Nombre:= 'NIT';
+  R.Valor := Value;
+  R.Operador := opAnd;
+  P.Add(R);
+  Result := Retorno<T,T2>(Model.Load<T>(P).FirstOrDefault);
 end;
+
 
 function TAxnSrvClt.NIT(const Value: String): IAxnVMCli0;
 begin
-  Result := TAxnVMCli0.Create(InternalNIT<TAxnMCli0>(Value));
+  Result := InternalNIT<TAxnMCli0, TAxnVMCli0>(Value);
 end;
 
 { TAxnPkgPrv }

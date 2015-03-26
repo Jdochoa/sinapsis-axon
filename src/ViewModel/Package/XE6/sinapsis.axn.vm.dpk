@@ -36,7 +36,8 @@ requires
   vcl,
   vclimg,
   Spring.Base,
-  UIBD20Win32R;
+  UIBD20Win32R,
+  DbxCommonDriver;
 
 contains
   sinapsis.axn.vm.interfaz in '..\..\axn\sinapsis.axn.vm.interfaz.pas',

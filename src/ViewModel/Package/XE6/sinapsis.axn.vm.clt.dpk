@@ -34,7 +34,8 @@ requires
   vcl,
   vclimg,
   dbrtl,
-  UIBD20Win32R;
+  UIBD20Win32R,
+  DbxCommonDriver;
 
 contains
   sinapsis.axn.vm.clt.cliente in '..\..\clt\sinapsis.axn.vm.clt.cliente.pas',
