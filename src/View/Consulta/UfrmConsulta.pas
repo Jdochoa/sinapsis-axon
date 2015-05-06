@@ -8,28 +8,18 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
+  System.Actions,
+  Vcl.ActnList,
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
   Vcl.Dialogs,
   Vcl.StdCtrls,
-  Vcl.Bind.DBEngExt,
-  System.Rtti,
-  System.Bindings.Outputs,
-  Data.Bind.Components,
-  Vcl.ComCtrls,
-  Vcl.Grids,
-  Vcl.DBGrids,
-  Vcl.Bind.Grid,
-  Vcl.Bind.Editors,
   Vcl.ExtCtrls,
-  Data.Bind.EngExt,
-  Data.Bind.Grid,
-  Data.Bind.DBScope,
-  Data.Bind.ObjectScope,
-  cxFilterControl, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
-  cxStyles, dxSkinsCore, dxSkinBlack, dxSkinBlue, dxSkinBlueprint,
-  dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+
+  cxGraphics, cxLookAndFeels,
+  cxLookAndFeelPainters, Vcl.Menus, dxSkinsCore, dxSkinBlack, dxSkinBlue,
+  dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
   dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle, dxSkinFoggy,
   dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian,
   dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMetropolis,
@@ -41,56 +31,56 @@ uses
   dxSkinSharp, dxSkinSharpPlus, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
   dxSkinSummer2008, dxSkinTheAsphaltWorld, dxSkinsDefaultPainters,
   dxSkinValentine, dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue,
-  dxSkinscxPCPainter, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit,
-  cxNavigator, Data.DBXFirebird, Data.DB, Data.SqlExpr, dxServerModeData,
-  dxServerModeDBXDataSource, cxGridLevel, cxGridCustomTableView,
-  cxGridTableView, cxGridServerModeTableView, cxClasses, cxGridCustomView,
-  cxGrid, cxTextEdit, cxGridDBTableView, cxDBdata, Vcl.Menus, cxButtons,
-  System.Actions, Vcl.ActnList;
+  cxControls, cxStyles, dxSkinscxPCPainter, cxCustomData, cxFilter, cxData,
+  cxDataStorage, cxEdit, cxNavigator, cxGridCustomView, cxGridCustomTableView,
+  cxGridTableView, cxClasses, cxGridLevel, cxGrid, cxButtons,
+
+  Spring.Collections,
+  sinapsis.axn.vm.catalogo.interfaz
+
+  ;
 
 const
   CM_APPLYFILTER = WM_USER + 1;
 
 
 type
+  TGenerateColumns = reference to procedure (tvonsulta: TcxGridTableView);
   TfrmConsulta = class(TForm)
-    cxgCNivel: TcxGridLevel;
-    cxgConsulta: TcxGrid;
-    cxgCConsultaSM: TcxGridServerModeTableView;
-    dsConsulta: TdxServerModeDBXQueryDataSource;
-    cxgCConsultaSMID: TcxGridServerModeColumn;
-    cxgCConsultaSMCODIGO: TcxGridServerModeColumn;
-    cxgCConsultaSMDESCRIPCION: TcxGridServerModeColumn;
-    cxgConsultaTableView1: TcxGridTableView;
     Panel1: TPanel;
     btnOK: TcxButton;
     cxButton2: TcxButton;
     acConsulta: TActionList;
     acOK: TAction;
-    procedure cxgCConsultaSMInitEditValue(Sender: TcxCustomGridTableView;
-      AItem: TcxCustomGridTableItem; AEdit: TcxCustomEdit; var AValue: Variant);
-    procedure cxgCConsultaSMEditChanged(Sender: TcxCustomGridTableView;
-      AItem: TcxCustomGridTableItem);
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid1: TcxGrid;
+    tvConsulta: TcxGridTableView;
+    tvConsultaID: TcxGridColumn;
+    tvConsultaCODIGO: TcxGridColumn;
+    tvConsultaDESCRIPCION: TcxGridColumn;
+    tvConsultaColumn1: TcxGridColumn;
   private
-    FilterString: string;
-    procedure CMApplyFilter(var Msg: TMessage); message CM_APPLYFILTER;
-    function GetConnection: TSQLConnection;
-    procedure SetConnection(const Value: TSQLConnection);
+    FDatos : IList<IAxnVMCtl>;
     function GetId: Integer;
-    function GetSQL: String;
-    procedure SetSQL(const Value: String);
+    function GetDatos: IList<IAxnVMCtl>;
+    procedure SetDatos(const Value: IList<IAxnVMCtl>);
+    function GetAxnVMCtl: IAxnVMCtl;
+  protected
+    procedure RefrescaInfo;
   public
     { Public declarations }
     function Execute:Integer;
-    property Connection: TSQLConnection read GetConnection write SetConnection;
+    procedure GenerateColumns(Value : TGenerateColumns);
+    property Datos: IList<IAxnVMCtl> read GetDatos write SetDatos;
     property Id: Integer read GetId;
-    property SQL: String read GetSQL write SetSQL;
+    property AxnVMCtl:IAxnVMCtl read GetAxnVMCtl;
   end;
 
-var
-  frmConsulta: TfrmConsulta;
 
 implementation
+uses
+  sinapsis.axn.vm.clt.interfaz,
+  sinapsis.axn.vm.clt.Cliente;
 
 {$R *.dfm}
 
@@ -98,102 +88,96 @@ implementation
 { TForm1 }
 
 
-procedure TfrmConsulta.CMApplyFilter(var Msg: TMessage);
-begin
-  if TObject(Msg.WParam) is TcxDataFilterCriteria then
-    with TObject(Msg.WParam) as TcxDataFilterCriteria do
-    begin
-     // Clear;
-      FilterString :=  FilterString + '%';
-      Root.BoolOperatorKind := fboOr;
-      Root.AddItem(TObject(Msg.LParam), foLike, FilterString, FilterString);
-      FilterString :=  '% ' + FilterString;
-      Root.AddItem(TObject(Msg.LParam), foLike, FilterString, FilterString);
-    end;
-    keybd_event(VK_RIGHT, 1, 0, 0)
-end;
 
-procedure TfrmConsulta.cxgCConsultaSMEditChanged(Sender: TcxCustomGridTableView;
-  AItem: TcxCustomGridTableItem);
-begin
-  if Sender.Controller.FocusedRecord is TcxGridFilterRow then  // Filter row is focused
-  begin
-    FilterString := TcxTextEdit(Sender.Controller.EditingController.Edit).EditingValue;
-    PostMessage(Handle, CM_APPLYFILTER, Integer(Sender.DataController.Filter), Integer(AItem));
-  end;
-end;
 
-procedure TfrmConsulta.cxgCConsultaSMInitEditValue(
-  Sender: TcxCustomGridTableView; AItem: TcxCustomGridTableItem;
-  AEdit: TcxCustomEdit; var AValue: Variant);
-var
-  EditingText: string;
+
+procedure TfrmConsulta.GenerateColumns(Value : TGenerateColumns);
 begin
-  if Sender.Controller.FocusedRecord is TcxGridFilterRow then  // Filter row is focused
+  with tvConsulta as TcxGridTableView do
   begin
-    EditingText := TcxTextEdit(AEdit).EditingText;
-    StringReplace(EditingText, '%', '', [rfReplaceAll, rfIgnoreCase]);
-    TcxTextEdit(AEdit).EditingText := EditingText;
+    ClearItems;
+    Value(tvConsulta);
   end;
 
+
+  //tvCustomers.DataController.CustomDataSource := CustomerDataSource;
 end;
-
-
 
 function TfrmConsulta.Execute: Integer;
 begin
-//  Assert((not Assigned(dsConsulta.Connection)),'¡No se ha inicializado la conexcion a la DB!');
-  dsConsulta.Active := True;
-  cxgCConsultaSM.DataController.Filter.Options := [fcoCaseInsensitive];
-  cxgCConsultaSM.FilterRow.ApplyChanges := fracImmediately;
   Result := ShowModal;
 end;
 
-function TfrmConsulta.GetConnection: TSQLConnection;
+
+function TfrmConsulta.GetAxnVMCtl: IAxnVMCtl;
+var
+  LId : Integer;
 begin
-  Result := dsConsulta.Connection;
+  LId := Id;
+  Datos.TryGetSingle(Result,function (const Value:IAxnVMCtl ):Boolean
+                            begin
+                                Result := Value.ID = LId;
+                            end);
+
+end;
+
+function TfrmConsulta.GetDatos: IList<IAxnVMCtl>;
+begin
+  Result := FDatos;
 end;
 
 function TfrmConsulta.GetId: Integer;
-var
-  RecIdx : Integer;
-  ColIdx : Integer;
 begin
   Result := -1;
-  if cxgCConsultaSM.Controller.SelectedRecordCount > 0 then
+  if tvConsulta.Controller.SelectedRecordCount > 0 then
   begin
-    if cxgCConsultaSM.Controller.SelectedRecordCount = 1 then
+    if tvConsulta.Controller.SelectedRecordCount = 1 then
     begin
-      RecIdx := cxgCConsultaSM.Controller.SelectedRecords[0].RecordIndex;
-      ColIdx := cxgCConsultaSM.DataController.GetItemByFieldName('ID').Index;
-      Result := cxgCConsultaSM.DataController.Values[RecIdx,ColIdx];
+      Result := tvConsulta.Controller.SelectedRecords[0].Values[0];
     end
     else
       raise Exception.Create('¡Solo de puede seleccionar un elemento a la vez!');
-
   end
   else
     raise Exception.Create('¡No se selecciono ningún dato!');
-
 end;
 
-function TfrmConsulta.GetSQL: String;
+procedure TfrmConsulta.RefrescaInfo;
+var
+  Ctl0 : IAxnVMCtl;
+  I : Integer;
+  S:STRING;
 begin
-  Result := dsConsulta.SQL.ToString;
+  I := 0;
+  with tvConsulta.DataController as TcxGridDataController do
+  begin
+    BeginUpdate;
+    ClearDetails;
+    RecordCount := FDatos.Count;
+    try
+      for Ctl0 in FDatos do
+      begin
+        Values[I, 0] := Ctl0.ID;
+        Values[I, 1] := Ctl0.Codigo;
+        Values[I, 2] := Ctl0.Descripcion;
+//        if (Ctl0 is TAxnVMCli0) then
+//          S :=TAxnVMCli0(Ctl0).Direccion;
+//        Values[I, 3] :=  S;
+        Inc(I);
+      end;
+    finally
+      EndUpdate;
+    end;
+  end;
+  tvConsulta.FindPanel.GridView.Focused;
 end;
 
-procedure TfrmConsulta.SetConnection(const Value: TSQLConnection);
+procedure TfrmConsulta.SetDatos(const Value: IList<IAxnVMCtl>);
 begin
-  dsConsulta.Close;
-  dsConsulta.Connection := Value;
-end;
+  FDatos := Value;
+  RefrescaInfo;
+  //Application.MessageBox(PWideChar(LDato.Codigo+'-'+LDato.Descripcion+'--'+LDato.NIT), 'Resultado', MB_OK);
 
-
-procedure TfrmConsulta.SetSQL(const Value: String);
-begin
-  dsConsulta.Close;
-  dsConsulta.SQL.Clear;
-  dsConsulta.SQL.Add(Value);
 end;
 
 end.

@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B23BFE52-99BD-4F18-9A1E-E078B2E72DD8}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Consulta.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.clt.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Consulta">
+        <MSBuild Projects="Consulta.dproj"/>
+    </Target>
+    <Target Name="Consulta:Clean">
+        <MSBuild Projects="Consulta.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Consulta:Make">
+        <MSBuild Projects="Consulta.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm_clt">
+        <MSBuild Projects="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.clt.dproj"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm_clt:Clean">
+        <MSBuild Projects="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.clt.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm_clt:Make">
+        <MSBuild Projects="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.clt.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Consulta;sinapsis_axn_vm_clt"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Consulta:Clean;sinapsis_axn_vm_clt:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Consulta:Make;sinapsis_axn_vm_clt:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

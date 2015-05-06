@@ -1,11 +1,10 @@
 object frmConsulta: TfrmConsulta
   Left = 0
   Top = 0
-  ActiveControl = cxgConsulta
   BorderStyle = bsToolWindow
   Caption = 'Consulta'
   ClientHeight = 445
-  ClientWidth = 390
+  ClientWidth = 492
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,104 +17,13 @@ object frmConsulta: TfrmConsulta
   ScreenSnap = True
   PixelsPerInch = 96
   TextHeight = 13
-  object cxgConsulta: TcxGrid
-    Left = 0
-    Top = 0
-    Width = 390
-    Height = 412
-    Align = alClient
-    TabOrder = 0
-    ExplicitWidth = 408
-    ExplicitHeight = 445
-    object cxgCConsultaSM: TcxGridServerModeTableView
-      DragMode = dmAutomatic
-      Navigator.Buttons.CustomButtons = <>
-      Navigator.Buttons.Insert.Enabled = False
-      Navigator.Buttons.Insert.Visible = False
-      Navigator.Buttons.Append.Enabled = False
-      Navigator.Buttons.Delete.Enabled = False
-      Navigator.Buttons.Delete.Visible = False
-      Navigator.Buttons.Edit.Enabled = False
-      Navigator.Buttons.Edit.Visible = False
-      Navigator.Buttons.Post.Enabled = False
-      Navigator.Buttons.Post.Visible = False
-      Navigator.Buttons.Cancel.Enabled = False
-      Navigator.Buttons.Cancel.Visible = False
-      Navigator.Buttons.SaveBookmark.Enabled = False
-      Navigator.Buttons.SaveBookmark.Visible = False
-      Navigator.Buttons.GotoBookmark.Enabled = False
-      Navigator.Buttons.GotoBookmark.Visible = False
-      Navigator.Visible = True
-      FilterBox.CustomizeDialog = False
-      FilterBox.Visible = fvAlways
-      OnEditChanged = cxgCConsultaSMEditChanged
-      OnInitEditValue = cxgCConsultaSMInitEditValue
-      DataController.DataSource = dsConsulta
-      DataController.Filter.Options = [fcoCaseInsensitive, fcoShowOperatorDescription, fcoSoftNull, fcoSoftCompare, fcoIgnoreNull]
-      DataController.Filter.Active = True
-      DataController.Options = [sdcoAssignGroupingValues, sdcoImmediatePost, sdcoKeepFocusedRowOnUpdate, sdcoSaveExpanding]
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <>
-      DataController.Summary.SummaryGroups = <>
-      Filtering.ColumnFilteredItemsList = True
-      Filtering.ColumnPopup.ApplyMultiSelectChanges = fpacOnButtonClick
-      FilterRow.InfoText = 'Click ac'#225' para filtrar la informaci'#243'n'
-      FilterRow.Visible = True
-      FilterRow.ApplyChanges = fracImmediately
-      OptionsBehavior.CopyCaptionsToClipboard = False
-      OptionsBehavior.CopyRecordsToClipboard = False
-      OptionsBehavior.IncSearch = True
-      OptionsBehavior.CopyPreviewToClipboard = False
-      OptionsCustomize.ColumnGrouping = False
-      OptionsCustomize.ColumnMoving = False
-      OptionsData.CancelOnExit = False
-      OptionsData.Deleting = False
-      OptionsData.DeletingConfirmation = False
-      OptionsData.Editing = False
-      OptionsData.Inserting = False
-      OptionsSelection.InvertSelect = False
-      OptionsView.NoDataToDisplayInfoText = '<No hay datos>'
-      OptionsView.Footer = True
-      OptionsView.FooterAutoHeight = True
-      OptionsView.GroupByBox = False
-      OptionsView.HeaderAutoHeight = True
-      OptionsView.HeaderFilterButtonShowMode = fbmButton
-      OptionsView.Indicator = True
-      OptionsView.IndicatorWidth = 10
-      object cxgCConsultaSMID: TcxGridServerModeColumn
-        DataBinding.FieldName = 'ID'
-        Visible = False
-      end
-      object cxgCConsultaSMCODIGO: TcxGridServerModeColumn
-        Caption = 'C'#243'digo'
-        DataBinding.FieldName = 'CODIGO'
-        Width = 50
-      end
-      object cxgCConsultaSMDESCRIPCION: TcxGridServerModeColumn
-        Caption = 'Descripci'#243'n'
-        DataBinding.FieldName = 'DESCRIPCION'
-        Width = 250
-      end
-    end
-    object cxgConsultaTableView1: TcxGridTableView
-      Navigator.Buttons.CustomButtons = <>
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <>
-      DataController.Summary.SummaryGroups = <>
-    end
-    object cxgCNivel: TcxGridLevel
-      GridView = cxgCConsultaSM
-    end
-  end
   object Panel1: TPanel
     Left = 0
     Top = 412
-    Width = 390
+    Width = 492
     Height = 33
     Align = alBottom
-    TabOrder = 1
-    ExplicitTop = 411
-    ExplicitWidth = 408
+    TabOrder = 0
     object btnOK: TcxButton
       Left = 208
       Top = 4
@@ -136,14 +44,79 @@ object frmConsulta: TfrmConsulta
       TabOrder = 1
     end
   end
-  object dsConsulta: TdxServerModeDBXQueryDataSource
-    KeyFieldNames = 'CODIGO'
-    SQLAdapterClassName = 'TdxServerModeFirebirdAdapter'
-    SQL.Strings = (
-      'select Id, Codigo, Descripcion '
-      'from Clt_Cli0_Cliente')
-    Left = 80
-    Top = 176
+  object cxGrid1: TcxGrid
+    Left = 0
+    Top = 0
+    Width = 492
+    Height = 412
+    Align = alClient
+    TabOrder = 1
+    object tvConsulta: TcxGridTableView
+      Navigator.Buttons.CustomButtons = <>
+      Navigator.Buttons.Insert.Enabled = False
+      Navigator.Buttons.Insert.Visible = False
+      Navigator.Buttons.Append.Enabled = False
+      Navigator.Buttons.Append.Visible = False
+      Navigator.Buttons.Delete.Enabled = False
+      Navigator.Buttons.Delete.Visible = False
+      Navigator.Buttons.Edit.Enabled = False
+      Navigator.Buttons.Edit.Visible = False
+      Navigator.Buttons.Post.Enabled = False
+      Navigator.Buttons.Post.Visible = False
+      Navigator.Buttons.Cancel.Enabled = False
+      Navigator.Buttons.Cancel.Visible = False
+      Navigator.Buttons.Filter.Visible = True
+      Navigator.InfoPanel.Visible = True
+      Navigator.Visible = True
+      FilterBox.Visible = fvNever
+      FindPanel.ApplyInputDelay = 750
+      FindPanel.DisplayMode = fpdmAlways
+      FindPanel.InfoText = 'Ingrese su busqueda...'
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      FilterRow.Visible = True
+      OptionsCustomize.ColumnGrouping = False
+      OptionsCustomize.ColumnMoving = False
+      OptionsData.CancelOnExit = False
+      OptionsData.Deleting = False
+      OptionsData.DeletingConfirmation = False
+      OptionsData.Editing = False
+      OptionsData.Inserting = False
+      OptionsSelection.CellSelect = False
+      OptionsView.GroupByBox = False
+      OptionsView.Indicator = True
+      object tvConsultaID: TcxGridColumn
+        AlternateCaption = 'Id'
+        Caption = 'Id'
+        DataBinding.ValueType = 'LargeInt'
+        Visible = False
+      end
+      object tvConsultaCODIGO: TcxGridColumn
+        AlternateCaption = 'C'#243'digo'
+        Caption = 'C'#243'digo'
+        MinWidth = 100
+        Options.Editing = False
+        Options.GroupFooters = False
+        Options.Grouping = False
+        Options.Moving = False
+        Width = 100
+      end
+      object tvConsultaDESCRIPCION: TcxGridColumn
+        AlternateCaption = 'Descripci'#243'n'
+        Caption = 'Descripci'#243'n'
+        MinWidth = 250
+        Options.Editing = False
+        Options.Moving = False
+        Width = 250
+      end
+      object tvConsultaColumn1: TcxGridColumn
+        Width = 100
+      end
+    end
+    object cxGrid1Level1: TcxGridLevel
+      GridView = tvConsulta
+    end
   end
   object acConsulta: TActionList
     Left = 328
