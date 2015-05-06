@@ -28,6 +28,7 @@ type
   public
     constructor Create; overload;
     constructor Create(Driver: TDBDriverType;strFile:String); overload;
+    constructor Create(AConnection: IDBConnection); overload;
     function LoadList<T:TAxnM, constructor>:IList<T>;
     function Load<T:Class , constructor>():IList<T>; overload;
     function Load<T:Class, constructor>(Id : Integer):IList<T>; overload;
@@ -47,8 +48,8 @@ uses
    Spring.Persistence.Criteria.Criterion.Disjunction,
 //   Spring.Persistence.Adapters.SQLite,
 //   SQLiteTable3,
-   Spring.Persistence.Adapters.UIB,
-   uib,
+//   Spring.Persistence.Adapters.UIB,
+//   uib,
 //   Spring.Persistence.SQL.Commands.TableCreator,
    sinapsis.axn.m.clt.cliente
 
@@ -96,7 +97,7 @@ end;
 constructor TAxnModelSORM.Create(Driver: TDBDriverType; strFile: String);
 var
   FConnection: IDBConnection;
-  FDatabase: TUIBDataBase;
+//  FDatabase: TUIBDataBase;
 begin
 //  FDatabase := TUIBDataBase.Create(nil);
 //  FDatabase.DatabaseName := '127.0.0.1:C:\Sinapsis\axn\dxn\Multicolor\Escuintla\Axon.DXN';
@@ -155,6 +156,11 @@ end;
 function TAxnModelSORM.Session: TSession;
 begin
   Result := TSession(FSession);
+end;
+
+constructor TAxnModelSORM.Create(AConnection: IDBConnection);
+begin
+  FSession := TSession.Create(AConnection);
 end;
 
 function TAxnModelSORM.Load<T>(const SQL:String; const params: array of const): IList<T>;
