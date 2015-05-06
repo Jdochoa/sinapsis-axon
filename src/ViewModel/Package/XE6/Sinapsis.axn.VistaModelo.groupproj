@@ -21,6 +21,9 @@
         <Projects Include="Pruebas.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="ddl.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -83,14 +86,23 @@
     <Target Name="Pruebas:Make">
         <MSBuild Projects="Pruebas.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ddl">
+        <MSBuild Projects="ddl.dproj"/>
+    </Target>
+    <Target Name="ddl:Clean">
+        <MSBuild Projects="ddl.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ddl:Make">
+        <MSBuild Projects="ddl.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="sinapsis_axn_vm;sinapsis_axn_vm_ctl;sinapsis_axn_vm_clt;sinapsis_axn_vm_prv;sinapsis_axn_ViewModel_Test;Pruebas"/>
+        <CallTarget Targets="sinapsis_axn_vm;sinapsis_axn_vm_ctl;sinapsis_axn_vm_clt;sinapsis_axn_vm_prv;sinapsis_axn_ViewModel_Test;Pruebas;ddl"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="sinapsis_axn_vm:Clean;sinapsis_axn_vm_ctl:Clean;sinapsis_axn_vm_clt:Clean;sinapsis_axn_vm_prv:Clean;sinapsis_axn_ViewModel_Test:Clean;Pruebas:Clean"/>
+        <CallTarget Targets="sinapsis_axn_vm:Clean;sinapsis_axn_vm_ctl:Clean;sinapsis_axn_vm_clt:Clean;sinapsis_axn_vm_prv:Clean;sinapsis_axn_ViewModel_Test:Clean;Pruebas:Clean;ddl:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="sinapsis_axn_vm:Make;sinapsis_axn_vm_ctl:Make;sinapsis_axn_vm_clt:Make;sinapsis_axn_vm_prv:Make;sinapsis_axn_ViewModel_Test:Make;Pruebas:Make"/>
+        <CallTarget Targets="sinapsis_axn_vm:Make;sinapsis_axn_vm_ctl:Make;sinapsis_axn_vm_clt:Make;sinapsis_axn_vm_prv:Make;sinapsis_axn_ViewModel_Test:Make;Pruebas:Make;ddl:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

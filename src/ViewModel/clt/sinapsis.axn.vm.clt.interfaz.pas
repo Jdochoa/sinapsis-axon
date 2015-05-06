@@ -3,7 +3,6 @@ unit sinapsis.axn.vm.clt.interfaz;
 interface
 
 uses
-
   sinapsis.axn.m.clt.interfaz,
   sinapsis.axn.m.clt.cliente,
   sinapsis.axn.vm.interfaz,
