@@ -33,7 +33,8 @@ package sinapsis.axn.m;
 requires
   rtl,
   dbrtl,
-  Spring.Persistence;
+  Spring.Persistence,
+  DbxCommonDriver;
 
 contains
   sinapsis.axn.m.interfaz in '..\..\axn\sinapsis.axn.m.interfaz.pas',

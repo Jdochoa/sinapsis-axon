@@ -138,6 +138,7 @@
         <DCCReference Include="rtl.dcp"/>
         <DCCReference Include="dbrtl.dcp"/>
         <DCCReference Include="Spring.Persistence.dcp"/>
+        <DCCReference Include="DbxCommonDriver.dcp"/>
         <DCCReference Include="..\..\axn\sinapsis.axn.m.interfaz.pas"/>
         <DCCReference Include="..\..\axn\sinapsis.axn.m.pas"/>
         <BuildConfiguration Include="Release">

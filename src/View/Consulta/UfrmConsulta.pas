@@ -69,6 +69,7 @@ type
     procedure RefrescaInfo;
   public
     { Public declarations }
+
     function Execute:Integer;
     procedure GenerateColumns(Value : TGenerateColumns);
     property Datos: IList<IAxnVMCtl> read GetDatos write SetDatos;
@@ -78,9 +79,6 @@ type
 
 
 implementation
-uses
-  sinapsis.axn.vm.clt.interfaz,
-  sinapsis.axn.vm.clt.Cliente;
 
 {$R *.dfm}
 
@@ -98,8 +96,6 @@ begin
     ClearItems;
     Value(tvConsulta);
   end;
-
-
   //tvCustomers.DataController.CustomDataSource := CustomerDataSource;
 end;
 
@@ -176,8 +172,6 @@ procedure TfrmConsulta.SetDatos(const Value: IList<IAxnVMCtl>);
 begin
   FDatos := Value;
   RefrescaInfo;
-  //Application.MessageBox(PWideChar(LDato.Codigo+'-'+LDato.Descripcion+'--'+LDato.NIT), 'Resultado', MB_OK);
-
 end;
 
 end.

@@ -3,7 +3,9 @@ program Consulta;
 uses
   Vcl.Forms,
   UfrmConsulta in 'UfrmConsulta.pas' {frmConsulta},
-  ufrmPrueba in 'ufrmPrueba.pas' {Form1};
+  ufrmPrueba in 'ufrmPrueba.pas' {Form1},
+  sinapsis.axn.v.consulta.interfaz in 'sinapsis.axn.v.consulta.interfaz.pas',
+  sinapsis.axn.v.consulta in 'sinapsis.axn.v.consulta.pas';
 
 {$R *.res}
 

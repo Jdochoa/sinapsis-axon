@@ -8,12 +8,7 @@ uses
 
   Spring.Persistence.Core.Interfaces,
   Spring.Persistence.Core.Session,
-  Spring.Persistence.Core.DatabaseManager,
   Spring.Persistence.Core.ConnectionFactory,
-
-  Spring.Persistence.Criteria.Properties,
-  Spring.Persistence.SQL.Params,
-//  Spring.Persistence.Mapping.CodeGenerator.DB,
 
   sinapsis.axn.m,
   sinapsis.axn.model,
@@ -42,6 +37,7 @@ type
 implementation
 
 uses
+   Spring.Persistence.Criteria.Properties,
    Spring.Persistence.Criteria.Interfaces,
    Spring.Persistence.Criteria.Restrictions,
    Spring.Persistence.Criteria.Criterion.Conjunction,

@@ -122,8 +122,8 @@
         <VerInfo_MajorVer>1</VerInfo_MajorVer>
         <VerInfo_MinorVer>0</VerInfo_MinorVer>
         <DCC_Description>Axon de Sinapsis: Core del ViewModel</DCC_Description>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.154;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_Build>154</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.158;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>158</VerInfo_Build>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
     </PropertyGroup>

@@ -33,10 +33,10 @@ type
   ICustomerRepository = interface(IPagedRepository<TAxnMCli0, Integer>)
     ['{C306C170-AB69-4993-AEBB-8E530988095D}']
 
-    [Query('SELECT * FROM CLT_CLI0_CLIENTE WHERE Codigo = :Codigo')]
+    [Query('SELECT * FROM CLT_CLI0_CLIENTE WHERE Codigo = :0')]
     function FindByCodigo(const AName: string): TAxnMCli0;
 
-    [Query('SELECT * FROM CLT_CLI0_CLIENTE WHERE Codigo = :Codigo')]
+    [Query('SELECT * FROM CLT_CLI0_CLIENTE WHERE Codigo = :0')]
     function FindByNamePaged(const AName: string; APage: Integer; AItemsPerPage: Integer): IDBPage<TAxnMCli0>;
   end;
 

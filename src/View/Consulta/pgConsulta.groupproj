@@ -9,6 +9,9 @@
         <Projects Include="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.clt.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="sinapsis_axn_vm_clt:Make">
         <MSBuild Projects="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.clt.dproj" Targets="Make"/>
     </Target>
+    <Target Name="sinapsis_axn_vm">
+        <MSBuild Projects="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.dproj"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm:Clean">
+        <MSBuild Projects="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm:Make">
+        <MSBuild Projects="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Consulta;sinapsis_axn_vm_clt"/>
+        <CallTarget Targets="Consulta;sinapsis_axn_vm_clt;sinapsis_axn_vm"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Consulta:Clean;sinapsis_axn_vm_clt:Clean"/>
+        <CallTarget Targets="Consulta:Clean;sinapsis_axn_vm_clt:Clean;sinapsis_axn_vm:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Consulta:Make;sinapsis_axn_vm_clt:Make"/>
+        <CallTarget Targets="Consulta:Make;sinapsis_axn_vm_clt:Make;sinapsis_axn_vm:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
