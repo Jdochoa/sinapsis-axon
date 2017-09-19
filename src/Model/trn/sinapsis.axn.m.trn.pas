@@ -2,7 +2,7 @@ unit sinapsis.axn.m.trn;
 
 
 interface
-{$I Model.inc}
+{.$I Model.inc}
 
 uses
   {$IFDEF Marshmallow}
@@ -13,14 +13,11 @@ uses
    {$ENDIF}
   {$ENDIF}
   sinapsis.axn.m,
-  sinapsis.axn.m.Catalogo,
-  sinapsis.axn.m.Trn.interfaz
+  sinapsis.axn.m.ctl,
+  sinapsis.axn.m.trn.interfaz
   ;
 
 type
- { TTrnEmp = class;
-  TTrnEmps = class(TObjectList<TTrnEmp>)
-  end;}
   {$IFDEF Marshmallow}
     [Entity]
     [Table('TRN_TRN0_TRANSACCION','')]
@@ -49,7 +46,7 @@ type
 //    property Mdl0_ID: Integer read FMdl0_Id write FMdl0_Id;
   public
   {$IFDEF Marshmallow}
-     [Column('FAFECTA', [cpRequired, cpNotNull], -1, -1, -1, 'Forma Afecta')]
+     //[Column('FAFECTA', [cpRequired, cpNotNull], -1, -1, -1, 'Forma Afecta')]
   {$ELSE}
    {$IFDEF DORM}
     [Column('FAFECTA')]

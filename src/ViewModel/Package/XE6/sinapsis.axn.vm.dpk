@@ -25,23 +25,23 @@ package sinapsis.axn.vm;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'Axon de Sinapsis: Core del ViewModel'}
+{$DESCRIPTION 'Axon de Sinapsis: Core del VistaModelo'}
 {$LIBSUFFIX '200'}
 {$RUNONLY}
 {$IMPLICITBUILD ON}
 
 requires
   rtl,
-  dbrtl,
   vcl,
   vclimg,
+  DbxCommonDriver,
+  dbrtl,
   Spring.Base,
   UIBD20Win32R,
-  DbxCommonDriver;
+  Spring.Persistence;
 
 contains
   sinapsis.axn.vm.interfaz in '..\..\axn\sinapsis.axn.vm.interfaz.pas',
   sinapsis.axn.vm in '..\..\axn\sinapsis.axn.vm.pas';
 
 end.
-

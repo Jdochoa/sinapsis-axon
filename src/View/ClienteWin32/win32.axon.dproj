@@ -1,7 +1,7 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{31821E0F-A4FE-4915-A89D-695E7A839B9F}</ProjectGuid>
-        <ProjectVersion>15.1</ProjectVersion>
+        <ProjectVersion>15.4</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <MainSource>win32.axon.dpr</MainSource>
         <Base>True</Base>
@@ -46,12 +46,13 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <SanitizedProjectName>win32_axon</SanitizedProjectName>
         <UsePackages>true</UsePackages>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <Manifest_File>None</Manifest_File>
         <DCC_UnitSearchPath>E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\DORM\source;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\DORM\lib\sqlitewrap\source;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Base;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Base\Collections;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Base\Reflection;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Extensions;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Extensions\Cryptography;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Extensions\Utils;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Extensions\Numbering;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
+        <Icon_MainIcon>ClienteWin32\Sinapsis.ico</Icon_MainIcon>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>

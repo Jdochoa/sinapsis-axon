@@ -30,6 +30,9 @@ CREATE DOMAIN AXN_CODIGO
 CREATE DOMAIN AXN_DESCRIPCION
 	AS Varchar(200) DEFAULT NULL 
 	COLLATE ES_ES;
+CREATE DOMAIN AXN_CTLSTATUS
+	AS char(1) DEFAULT 'A' NOT NULL CHECK (VALUE IN ('A','I'))
+	COLLATE ISO8859_1;	
 /*--------------------------------------------*/
 /*----------------AXN_DOCUMENTO---------------*/
 /*--------------------------------------------*/

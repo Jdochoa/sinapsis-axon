@@ -2,7 +2,7 @@ unit sinapsis.axn.m.prv.interfaz;
 
 interface
 uses
-  sinapsis.axn.m.catalogo.interfaz;
+  sinapsis.axn.m.ctl.interfaz;
 
 type
   IAxnMPrv = interface(IAxnMCtl)

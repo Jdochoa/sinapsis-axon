@@ -4,7 +4,7 @@ interface
 uses
   Spring.Collections,
   sinapsis.axn.m.interfaz,
-  sinapsis.axn.m.Catalogo.interfaz
+  sinapsis.axn.m.ctl.interfaz
   ;
 
 const

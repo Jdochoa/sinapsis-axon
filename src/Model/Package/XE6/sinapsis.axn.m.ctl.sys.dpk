@@ -1,0 +1,45 @@
+package sinapsis.axn.m.ctl.sys;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Axon de Sinapsis: Modelo del system/subsystem'}
+{$LIBSUFFIX '200'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  dbrtl,
+  Spring.Persistence,
+  DbxCommonDriver,
+  Sinapsis.axn.m.ctl;
+
+contains
+  sinapsis.axn.m.ctl.sys.interfaz in '..\..\sys\sinapsis.axn.m.ctl.sys.interfaz.pas',
+  sinapsis.axn.m.ctl.sys in '..\..\sys\sinapsis.axn.m.ctl.sys.pas';
+
+end.
+

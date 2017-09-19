@@ -24,11 +24,14 @@ Type
     FSession :TObject;
   public
     function LoadList<T:Class, constructor>:IList<T>;
+    function LoadIList<T:Class, constructor>:IInterfaceList;
     function Load<T:Class, constructor>():IList<T>; overload;
+    function LoadI<T:Class, constructor>():IInterfaceList; overload;
     function Load<T:Class, constructor>(Id : Integer):IList<T>; overload;
     function Load<T:Class, constructor>(Codigo:String):IList<T>; overload;
     function Load<T:Class, constructor>(Params :IList<TAxnParam>):IList<T>;overload;
     function Load<T:Class, constructor>(const SQL:string; const params: array of const):IList<T>;overload;
+
   end;
 
 
@@ -119,6 +122,16 @@ begin
 end;
 
 function TAxnModel.Load<T>(const SQL:String; const params: array of const): IList<T>;
+begin
+  Result := nil;
+end;
+
+function TAxnModel.LoadI<T>: IInterfaceList;
+begin
+  Result := nil;
+end;
+
+function TAxnModel.LoadIList<T>: IInterfaceList;
 begin
   Result := nil;
 end;

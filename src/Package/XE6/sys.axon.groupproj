@@ -1,0 +1,96 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{B71B1F5F-F476-4A72-8CEA-8E5F24DCDAAD}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="..\..\Model\Package\XE6\sinapsis.axn.m.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\Model\Package\XE6\sinapsis.axn.m.ctl.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\Model\Package\XE6\sinapsis.axn.m.ctl.sys.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\Model\Package\XE6\sinapsis.axn.model.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Sinapsis.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="sinapsis_axn_m">
+        <MSBuild Projects="..\..\Model\Package\XE6\sinapsis.axn.m.dproj"/>
+    </Target>
+    <Target Name="sinapsis_axn_m:Clean">
+        <MSBuild Projects="..\..\Model\Package\XE6\sinapsis.axn.m.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sinapsis_axn_m:Make">
+        <MSBuild Projects="..\..\Model\Package\XE6\sinapsis.axn.m.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="sinapsis_axn_m_ctl">
+        <MSBuild Projects="..\..\Model\Package\XE6\sinapsis.axn.m.ctl.dproj"/>
+    </Target>
+    <Target Name="sinapsis_axn_m_ctl:Clean">
+        <MSBuild Projects="..\..\Model\Package\XE6\sinapsis.axn.m.ctl.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sinapsis_axn_m_ctl:Make">
+        <MSBuild Projects="..\..\Model\Package\XE6\sinapsis.axn.m.ctl.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="sinapsis_axn_m_ctl_sys">
+        <MSBuild Projects="..\..\Model\Package\XE6\sinapsis.axn.m.ctl.sys.dproj"/>
+    </Target>
+    <Target Name="sinapsis_axn_m_ctl_sys:Clean">
+        <MSBuild Projects="..\..\Model\Package\XE6\sinapsis.axn.m.ctl.sys.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sinapsis_axn_m_ctl_sys:Make">
+        <MSBuild Projects="..\..\Model\Package\XE6\sinapsis.axn.m.ctl.sys.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="sinapsis_axn_model">
+        <MSBuild Projects="..\..\Model\Package\XE6\sinapsis.axn.model.dproj"/>
+    </Target>
+    <Target Name="sinapsis_axn_model:Clean">
+        <MSBuild Projects="..\..\Model\Package\XE6\sinapsis.axn.model.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sinapsis_axn_model:Make">
+        <MSBuild Projects="..\..\Model\Package\XE6\sinapsis.axn.model.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm">
+        <MSBuild Projects="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.dproj"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm:Clean">
+        <MSBuild Projects="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sinapsis_axn_vm:Make">
+        <MSBuild Projects="..\..\ViewModel\Package\XE6\sinapsis.axn.vm.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Sinapsis">
+        <MSBuild Projects="Sinapsis.dproj"/>
+    </Target>
+    <Target Name="Sinapsis:Clean">
+        <MSBuild Projects="Sinapsis.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Sinapsis:Make">
+        <MSBuild Projects="Sinapsis.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="sinapsis_axn_m;sinapsis_axn_m_ctl;sinapsis_axn_m_ctl_sys;sinapsis_axn_model;sinapsis_axn_vm;Sinapsis"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="sinapsis_axn_m:Clean;sinapsis_axn_m_ctl:Clean;sinapsis_axn_m_ctl_sys:Clean;sinapsis_axn_model:Clean;sinapsis_axn_vm:Clean;Sinapsis:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="sinapsis_axn_m:Make;sinapsis_axn_m_ctl:Make;sinapsis_axn_m_ctl_sys:Make;sinapsis_axn_model:Make;sinapsis_axn_vm:Make;Sinapsis:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

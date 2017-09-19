@@ -35,10 +35,14 @@ requires
   dbrtl,
   vcl,
   vclimg,
+  DbxCommonDriver,
   UIBD20Win32R,
-  DbxCommonDriver;
+  Spring.Base,
+  Spring.Persistence,
+  sinapsis.axn.m;
 
 contains
+  Spring.Persistence.Adapters.UIB in '..\..\..\..\..\..\trunk\3rdParty\spring4d\Source\Persistence\Adapters\Spring.Persistence.Adapters.UIB.pas',
   sinapsis.axn.model.interfaz in '..\..\sinapsis.axn.model.interfaz.pas',
   sinapsis.axn.model in '..\..\sinapsis.axn.model.pas',
   sinapsis.axn.model.SORM in '..\..\sinapsis.axn.model.SORM.pas';

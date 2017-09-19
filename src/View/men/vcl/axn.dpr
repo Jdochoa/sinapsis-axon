@@ -2,8 +2,11 @@ program axn;
 
 uses
   Vcl.Forms,
-//  dorm.Loggers,
-  sinapsis.axn.v.men.frmMenu in 'sinapsis.axn.v.men.frmMenu.pas' {frmMenu};
+  Winapi.Windows,
+//  sinapsis.axn.v.men.frmMenu in 'sinapsis.axn.v.men.frmMenu.pas' {frmMenu},
+//  sinapsis.axn.v.men.LoadForm in 'sinapsis.axn.v.men.LoadForm.pas',
+  sinapsis.axn.v.frmsplash in '..\..\sinapsis\sinapsis.axn.v.frmsplash.pas' {frmSplash};
+
 //  sinapsis.axn.vm.mdl in '..\..\..\ViewModel\mdl\sinapsis.axn.vm.mdl.pas',
 //  sinapsis.axn.m.mdl in '..\..\..\Model\mdl\sinapsis.axn.m.mdl.pas',
 //  sinapsis.axn.common.axnFile in '..\..\..\Common\sinapsis.axn.common.axnFile.pas',
@@ -24,6 +27,12 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfrmMenu, frmMenu);
+  Application.ShowMainForm := False;
+//  Application.CreateForm(TfrmMenu, frmMenu);
+//  Application.CreateForm(TfrmSplash, frmSplash);
+  frmSplash := TfrmSplash.Create(Application);
+  frmSplash.ShowModal;
+//  frmSplash.Close;
+  Application.ShowMainForm := True;
   Application.Run;
 end.

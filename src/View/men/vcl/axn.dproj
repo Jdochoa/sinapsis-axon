@@ -1,14 +1,14 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{57A2105D-95E6-446C-9590-778180328954}</ProjectGuid>
-        <ProjectVersion>15.1</ProjectVersion>
-        <FrameworkType>VCL</FrameworkType>
+        <ProjectGuid>{595FFD04-9E1D-435F-82E1-33F990A433B2}</ProjectGuid>
         <MainSource>axn.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
+        <FrameworkType>VCL</FrameworkType>
+        <ProjectVersion>15.4</ProjectVersion>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -18,12 +18,7 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
-        <Base_Win64>true</Base_Win64>
-        <CfgParent>Base</CfgParent>
-        <Base>true</Base>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
         <Cfg_1>true</Cfg_1>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
@@ -34,70 +29,75 @@
         <Cfg_1>true</Cfg_1>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
         <Cfg_2>true</Cfg_2>
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <DCC_UnitSearchPath>E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\DORM\source;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Extensions;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Extensions\Cryptography;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Extensions\Utils;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Base;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Base\Collections;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Base\Reflection;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Core;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Core\Container;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\spring4d\Source\Core\Services;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\uib\source;E:\Sinapsis\axn\sinapsis.axon\trunk\3rdParty\DORM\lib\sqlitewrap\source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <Manifest_File>None</Manifest_File>
-        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
-        <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
-        <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
-        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
-        <DCC_E>false</DCC_E>
+        <Icon_MainIcon>Sinapsis.ico</Icon_MainIcon>
         <DCC_N>false</DCC_N>
-        <DCC_S>false</DCC_S>
-        <DCC_F>false</DCC_F>
+        <SanitizedProjectName>axn</SanitizedProjectName>
         <DCC_K>false</DCC_K>
+        <DCC_F>false</DCC_F>
+        <DCC_S>false</DCC_S>
+        <VerInfo_Locale>4106</VerInfo_Locale>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <UsePackages>true</UsePackages>
+        <DCC_E>false</DCC_E>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=;CFBundleName=</VerInfo_Keys>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-        <DCC_UsePackage>cxPivotGridChartRS17;cxTreeListdxBarPopupMenuRS17;dxCoreRS17;DBXSqliteDriver;dxThemeRS17;cxPageControldxBarPopupMenuRS17;dxPScxGridLnkRS17;fmx;IndySystem;dxPScxSchedulerLnkRS17;inetdbbde;vclib;DBXInterBaseDriver;DataSnapServer;DataSnapCommon;DataSnapClient;dxPScxTLLnkRS17;DataSnapProviderClient;DBXSybaseASEDriver;dxRibbonRS17;DbxCommonDriver;cxDataRS17;vclimg;dxServerModeRS17;dxSkinsdxBarPainterRS17;dbxcds;cxBarEditItemRS17;cxSchedulerRS17;MetropolisUILiveTile;cxPivotGridOLAPRS17;dxPSLnksRS17;dxPSdxDBTVLnkRS17;dxPSdxDBOCLnkRS17;vcldb;cxExportRS17;cxVerticalGridRS17;vcldsnap;dxPSCoreRS17;dxBarExtItemsRS17;dxGDIPlusRS17;DBXDb2Driver;dxNavBarRS17;DBXOracleDriver;CustomIPTransport;cxLibraryRS17;cxGridRS17;dsnap;IndyIPServer;cxSpreadSheetRS17;IndyCore;vcl;fmxase;IndyIPCommon;DBXMSSQLDriver;CloudService;dxSkinsdxDLPainterRS17;dxPScxCommonRS17;dcldxSkinsCoreRS17;dxPSdxOCLnkRS17;inetdbxpress;webdsnap;dxPScxVGridLnkRS17;Spring.Extensions;pckUCDataConnector_XE3;dxPScxExtCommonRS17;dxSkinscxSchedulerPainterRS17;adortl;dxPScxSSLnkRS17;Spring.Core;dxtrmdRS17;dxPSdxLCLnkRS17;dxPScxPCProdRS17;bindcompfmx;DataBindingsVCL170;vcldbx;Spring.Base;cxSchedulerGridRS17;rtl;dbrtl;DbxClientDriver;dxTabbedMDIRS17;bindcomp;inetdb;dxComnRS17;dxSkinsCoreRS17;dxBarRS17;dxdbtrRS17;DataBindings;DBXOdbcDriver;dxBarDBNavRS17;xmlrtl;dxorgcRS17;dxSkinsdxRibbonPainterRS17;svnui;ibxpress;IndyProtocols;DBXMySQLDriver;dxDockingRS17;dxLayoutControlRS17;bindengine;vclactnband;soaprtl;bindcompdbx;UIBD17Win32R;dxADOServerModeRS17;bindcompvcl;dxBarExtDBItemsRS17;dxPSPrVwRibbonRS17;vclie;dxPScxPivotGridLnkRS17;dxSpellCheckerRS17;cxPageControlRS17;vcltouch;dxSkinscxPCPainterRS17;websnap;dxTileControlRS17;dxmdsRS17;VclSmp;DBXInformixDriver;cxPivotGridRS17;dxPsPrVwAdvRS17;DataSnapConnectors;dxdborRS17;DBXFirebirdDriver;dsnapcon;inet;dorm_runtime_xe3;fmxobj;cxTreeListRS17;dxPSdxFCLnkRS17;vclx;cxEditorsRS17;svn;DBXSybaseASADriver;dxFlowChartRS17;fmxdae;dxSkinsdxNavBarPainterRS17;bdertl;dbexpress;DataSnapIndy10ServerTransport;dxDBXServerModeRS17;IndyIPClient;$(DCC_UsePackage)</DCC_UsePackage>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_UsePackage>cxPivotGridChartRS17;cxTreeListdxBarPopupMenuRS17;dxCoreRS17;DBXSqliteDriver;dxThemeRS17;cxPageControldxBarPopupMenuRS17;dxPScxGridLnkRS17;fmx;IndySystem;dxPScxSchedulerLnkRS17;vclib;DBXInterBaseDriver;DataSnapServer;DataSnapCommon;DataSnapClient;dxPScxTLLnkRS17;DataSnapProviderClient;DBXSybaseASEDriver;dxRibbonRS17;DbxCommonDriver;cxDataRS17;vclimg;dxServerModeRS17;dxSkinsdxBarPainterRS17;dbxcds;cxBarEditItemRS17;cxSchedulerRS17;cxPivotGridOLAPRS17;dxPSLnksRS17;dxPSdxDBTVLnkRS17;dxPSdxDBOCLnkRS17;vcldb;cxExportRS17;cxVerticalGridRS17;vcldsnap;dxPSCoreRS17;dxBarExtItemsRS17;dxGDIPlusRS17;DBXDb2Driver;dxNavBarRS17;DBXOracleDriver;CustomIPTransport;cxLibraryRS17;cxGridRS17;dsnap;IndyIPServer;cxSpreadSheetRS17;IndyCore;vcl;fmxase;IndyIPCommon;DBXMSSQLDriver;dxSkinsdxDLPainterRS17;dxPScxCommonRS17;dcldxSkinsCoreRS17;dxPSdxOCLnkRS17;inetdbxpress;webdsnap;dxPScxVGridLnkRS17;dxPScxExtCommonRS17;dxSkinscxSchedulerPainterRS17;adortl;dxPScxSSLnkRS17;Spring.Core;dxtrmdRS17;dxPSdxLCLnkRS17;dxPScxPCProdRS17;bindcompfmx;Spring.Base;rtl;dbrtl;DbxClientDriver;dxTabbedMDIRS17;bindcomp;inetdb;dxComnRS17;dxSkinsCoreRS17;dxBarRS17;dxdbtrRS17;DBXOdbcDriver;dxBarDBNavRS17;xmlrtl;dxorgcRS17;dxSkinsdxRibbonPainterRS17;ibxpress;IndyProtocols;DBXMySQLDriver;dxDockingRS17;dxLayoutControlRS17;bindengine;vclactnband;soaprtl;bindcompdbx;dxADOServerModeRS17;bindcompvcl;dxBarExtDBItemsRS17;dxPSPrVwRibbonRS17;vclie;dxPScxPivotGridLnkRS17;cxPageControlRS17;vcltouch;dxSkinscxPCPainterRS17;websnap;dxmdsRS17;VclSmp;DBXInformixDriver;cxPivotGridRS17;dxPsPrVwAdvRS17;DataSnapConnectors;dxdborRS17;DBXFirebirdDriver;dsnapcon;inet;fmxobj;cxTreeListRS17;dxPSdxFCLnkRS17;vclx;cxEditorsRS17;DBXSybaseASADriver;dxFlowChartRS17;fmxdae;dxSkinsdxNavBarPainterRS17;dbexpress;DataSnapIndy10ServerTransport;dxDBXServerModeRS17;IndyIPClient;$(DCC_UsePackage)</DCC_UsePackage>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
-        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
-        <DCC_DebugDCUs>true</DCC_DebugDCUs>
-        <DCC_Optimize>false</DCC_Optimize>
-        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
-        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <DCC_RemoteDebug>false</DCC_RemoteDebug>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
-        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
-        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
-        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
-        <DCC_DebugInformation>0</DCC_DebugInformation>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_Optimize>false</DCC_Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <Icon_MainIcon>Sinapsis.ico</Icon_MainIcon>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="sinapsis.axn.v.men.frmMenu.pas">
-            <Form>frmMenu</Form>
+        <DCCReference Include="..\..\sinapsis\sinapsis.axn.v.frmsplash.pas">
+            <Form>frmSplash</Form>
         </DCCReference>
-        <BuildConfiguration Include="Release">
+        <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
         </BuildConfiguration>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
-        <BuildConfiguration Include="Debug">
+        <BuildConfiguration Include="Release">
             <Key>Cfg_1</Key>
             <CfgParent>Base</CfgParent>
         </BuildConfiguration>
@@ -107,50 +107,13 @@
         <Borland.ProjectType/>
         <BorlandProject>
             <Delphi.Personality>
-                <VersionInfo>
-                    <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
-                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
-                    <VersionInfo Name="MajorVer">1</VersionInfo>
-                    <VersionInfo Name="MinorVer">0</VersionInfo>
-                    <VersionInfo Name="Release">0</VersionInfo>
-                    <VersionInfo Name="Build">0</VersionInfo>
-                    <VersionInfo Name="Debug">False</VersionInfo>
-                    <VersionInfo Name="PreRelease">False</VersionInfo>
-                    <VersionInfo Name="Special">False</VersionInfo>
-                    <VersionInfo Name="Private">False</VersionInfo>
-                    <VersionInfo Name="DLL">False</VersionInfo>
-                    <VersionInfo Name="Locale">1033</VersionInfo>
-                    <VersionInfo Name="CodePage">1252</VersionInfo>
-                </VersionInfo>
-                <VersionInfoKeys>
-                    <VersionInfoKeys Name="CompanyName"/>
-                    <VersionInfoKeys Name="FileDescription"/>
-                    <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
-                    <VersionInfoKeys Name="InternalName"/>
-                    <VersionInfoKeys Name="LegalCopyright"/>
-                    <VersionInfoKeys Name="LegalTrademarks"/>
-                    <VersionInfoKeys Name="OriginalFilename"/>
-                    <VersionInfoKeys Name="ProductName"/>
-                    <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
-                    <VersionInfoKeys Name="Comments"/>
-                    <VersionInfoKeys Name="CFBundleName"/>
-                    <VersionInfoKeys Name="CFBundleDisplayName"/>
-                    <VersionInfoKeys Name="CFBundleIdentifier"/>
-                    <VersionInfoKeys Name="CFBundleVersion"/>
-                    <VersionInfoKeys Name="CFBundlePackageType"/>
-                    <VersionInfoKeys Name="CFBundleSignature"/>
-                    <VersionInfoKeys Name="CFBundleAllowMixedLocalizations"/>
-                    <VersionInfoKeys Name="CFBundleExecutable"/>
-                </VersionInfoKeys>
                 <Source>
                     <Source Name="MainSource">axn.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k170.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp170.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\14.0\Bpl\VirtualTreesD20.bpl">VirtualTreeView Controls</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
-            <Deployment/>
             <Platforms>
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">False</Platform>

@@ -89,9 +89,9 @@ type
 implementation
 
 uses
-  System.SysUtils,
-  Spring.Persistence.Core.Interfaces,
-  Spring.Persistence.Mapping.RttiExplorer;
+  System.SysUtils;
+  //Spring.Persistence.Core.Interfaces,
+  //Spring.Persistence.Mapping.RttiExplorer;
 
 { TAxnMV }
 
@@ -99,8 +99,6 @@ constructor TAxnMV.Create(Value: TAxnModel);
 begin
   FAxnModel := Value;
 end;
-
-
 
 
 function TAxnMV.GetModel: TAxnModel;
@@ -219,7 +217,7 @@ end;
 
 constructor TAxnPkg.Create;
 begin
-  inherited Create(TAxnModel.Create(dtUIB, 'C:\Sinapsis\axn\cnf\axn.firebird.json'));
+  //inherited Create(TAxnModel.Create(dtUIB, 'C:\Sinapsis\axn\cnf\axn.firebird.json'));
   FSrvMdl := TCollections.CreateDictionary<String, IAxnSrvMdl>;
 end;
 

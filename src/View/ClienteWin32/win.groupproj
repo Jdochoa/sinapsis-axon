@@ -6,15 +6,6 @@
         <Projects Include="win32.axon.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\..\..\3rdParty\DORM\source\packages\XE3\dorm_runtime_xe3.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="..\..\..\3rdParty\spring4d\Packages\DelphiXE3\Spring.Base.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="..\..\..\3rdParty\spring4d\Packages\DelphiXE3\Spring.Extensions.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="..\men\vcl\axn.dproj">
             <Dependencies/>
         </Projects>
@@ -35,33 +26,6 @@
     <Target Name="win32_axon:Make">
         <MSBuild Projects="win32.axon.dproj" Targets="Make"/>
     </Target>
-    <Target Name="dorm_runtime_xe3">
-        <MSBuild Projects="..\..\..\3rdParty\DORM\source\packages\XE3\dorm_runtime_xe3.dproj"/>
-    </Target>
-    <Target Name="dorm_runtime_xe3:Clean">
-        <MSBuild Projects="..\..\..\3rdParty\DORM\source\packages\XE3\dorm_runtime_xe3.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="dorm_runtime_xe3:Make">
-        <MSBuild Projects="..\..\..\3rdParty\DORM\source\packages\XE3\dorm_runtime_xe3.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="Spring_Base">
-        <MSBuild Projects="..\..\..\3rdParty\spring4d\Packages\DelphiXE3\Spring.Base.dproj"/>
-    </Target>
-    <Target Name="Spring_Base:Clean">
-        <MSBuild Projects="..\..\..\3rdParty\spring4d\Packages\DelphiXE3\Spring.Base.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Spring_Base:Make">
-        <MSBuild Projects="..\..\..\3rdParty\spring4d\Packages\DelphiXE3\Spring.Base.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="Spring_Extensions">
-        <MSBuild Projects="..\..\..\3rdParty\spring4d\Packages\DelphiXE3\Spring.Extensions.dproj"/>
-    </Target>
-    <Target Name="Spring_Extensions:Clean">
-        <MSBuild Projects="..\..\..\3rdParty\spring4d\Packages\DelphiXE3\Spring.Extensions.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Spring_Extensions:Make">
-        <MSBuild Projects="..\..\..\3rdParty\spring4d\Packages\DelphiXE3\Spring.Extensions.dproj" Targets="Make"/>
-    </Target>
     <Target Name="axn">
         <MSBuild Projects="..\men\vcl\axn.dproj"/>
     </Target>
@@ -72,13 +36,13 @@
         <MSBuild Projects="..\men\vcl\axn.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="win32_axon;dorm_runtime_xe3;Spring_Base;Spring_Extensions;axn"/>
+        <CallTarget Targets="win32_axon;axn"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="win32_axon:Clean;dorm_runtime_xe3:Clean;Spring_Base:Clean;Spring_Extensions:Clean;axn:Clean"/>
+        <CallTarget Targets="win32_axon:Clean;axn:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="win32_axon:Make;dorm_runtime_xe3:Make;Spring_Base:Make;Spring_Extensions:Make;axn:Make"/>
+        <CallTarget Targets="win32_axon:Make;axn:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

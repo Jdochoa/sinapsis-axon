@@ -35,7 +35,7 @@ requires
   sinapsis.axn.m;
 
 contains
-  sinapsis.axn.m.catalogo.interfaz in '..\..\axn\sinapsis.axn.m.catalogo.interfaz.pas',
-  sinapsis.axn.m.catalogo in '..\..\axn\sinapsis.axn.m.catalogo.pas';
+  sinapsis.axn.m.ctl.interfaz in '..\..\axn\sinapsis.axn.m.ctl.interfaz.pas',
+  sinapsis.axn.m.ctl in '..\..\axn\sinapsis.axn.m.ctl.pas';
 
 end.
